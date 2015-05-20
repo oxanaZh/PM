@@ -35,7 +35,9 @@ public abstract class Token {
 	 * @return null - wenn kein Match gefunden wurde.
 	 */
 	public final Token match(String string) {
+		
 		// fill me :)
+		return null;
 	}
 
 	/**

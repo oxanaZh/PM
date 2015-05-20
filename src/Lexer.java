@@ -53,12 +53,12 @@ public class Lexer {
      * @return alle erkannten Token in einer List
      */
     public List<Token> tokenize(String string) {
-  
+  return null;
         // fill me :)
     }
     
     private Token testTokens(String string){
-    	
+    	return null;
     }
 
     // fill me :)
