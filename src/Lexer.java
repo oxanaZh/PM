@@ -10,6 +10,8 @@ import java.util.List;
  */
 public class Lexer {
 
+	private List<Token> token;
+	private Token catchAll;
     // fill me :)
 
     /**
@@ -51,7 +53,12 @@ public class Lexer {
      * @return alle erkannten Token in einer List
      */
     public List<Token> tokenize(String string) {
+  
         // fill me :)
+    }
+    
+    private Token testTokens(String string){
+    	
     }
 
     // fill me :)
