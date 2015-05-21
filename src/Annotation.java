@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  */
 public class Annotation extends Token {
 
-	private String content;
+	private String conten;
 	@Override
 	protected Token getToken() {
 		// TODO Auto-generated method stub
