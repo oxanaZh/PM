@@ -10,8 +10,6 @@ import java.util.List;
  */
 public class Lexer {
 
-	private List<Token> token;
-	private Token catchAll;
     // fill me :)
 
     /**
@@ -53,6 +51,7 @@ public class Lexer {
      * @return alle erkannten Token in einer List
      */
     public List<Token> tokenize(String string) {
+<<<<<<< HEAD
   return null;
         // fill me :)
     }
@@ -60,6 +59,10 @@ public class Lexer {
     private Token testTokens(String string){
     	return null;
     }
+=======
+        // fill me :)
+    }
+>>>>>>> parent of 26541c0... Converted UML2Code
 
     // fill me :)
 
