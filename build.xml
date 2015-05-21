@@ -24,9 +24,12 @@
 
 	<target name="compile" depends="init">
 		<javac srcdir="src" destdir="${build.dir}" includeantruntime="false"/>
-		<javac srcdir="test" destdir="${build.dir}" includeantruntime="false">
+		</target>
+	<!--
+	<javac srcdir="test" destdir="${build.dir}" includeantruntime="false">
 			<classpath refid="junit.class.path" />
 		</javac>
+
 	</target>
 
 	<target name="test" depends="compile">
@@ -35,9 +38,9 @@
 			<formatter type="xml" />
 			<test name="TestAll" todir="${dist.dir}/test" />
 		</junit>
-	</target>
+	</target> -->
 
-	<target name="jar" depends="compile,test">
+	<target name="jar" depends="compile">
 		<jar basedir="${build.dir}" destfile="${build.dir}/tokenizer.jar">
 			<manifest>
 				<attribute name="Main-Class" value="Main" />
