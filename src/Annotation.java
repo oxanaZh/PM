@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
  *
  * @author Steven Yeates
  */
-<<<<<<< HEAD
+
 public class Annotation extends Token {
 
 	private String conten;
@@ -33,9 +33,7 @@ public class Annotation extends Token {
 		// TODO Auto-generated method stub
 		return null;
 	}
-=======
-public class Annotation {
->>>>>>> parent of 26541c0... Converted UML2Code
+
 
     // fill me :)
 

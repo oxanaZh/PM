@@ -33,6 +33,7 @@ public abstract class Token {
      */
     public final Token match(String string) {
         // fill me :)
+    	return null;
     }
 
     /**
@@ -43,50 +44,15 @@ public abstract class Token {
      * @return Match-Ergebnis
      */
     public final String getHtml() {
+		return null;
         // fill me :)
     }
 
     // fill me :)
 
-<<<<<<< HEAD
-	// fill me :)
 
-	/**
-	 * Die Methode match() ist in der abstrakten Basisklasse implementiert
-	 * (final). Sie erzeugt aus dem uebergebenen String und dem im Feld pattern
-	 * hinterlegten regulaeren Ausdruck ein Matcher-Objekt, welches sie im Feld
-	 * matcher fuer die spaetere Verwendung speichert.
-	 *
-	 * @see java.util.regex.Pattern
-	 * @see java.util.regex.Matcher
-	 *
-	 *      Bei erfolgreichem Match liefert sie unter Benutzung der Methode
-	 *      getToken() eine neue Instanz der konkreten Tokenklasse zurueck
-	 *      (sonst null).
-	 *
-	 * @param string
-	 *            - Ein beliebiger Text
-	 * @return Instanz der konkreten Tokenklasse
-	 * @return null - wenn kein Match gefunden wurde.
-	 */
-	public final Token match(String string) {
-		
-		// fill me :)
-		return null;
-	}
 
-	/**
-	 * Nach einem erfolgreichen Match durch die Methode match(String string)
-	 * liefert getHtml den im Match gefundenen Text eingebettet in einem
-	 * html-Code zurück.
-	 *
-	 * @return Match-Ergebnis
-	 */
-	public final String getHtml() {
-		// fill me :)
-		return this.htmlStart() + this.getContent() + this.getHtml(); // sollte
-																		// passen
-	}
+
 
 	// fill me :)
 	protected abstract Token getToken();
@@ -96,6 +62,5 @@ public abstract class Token {
 	protected abstract String htmlEnd();
 
 	protected abstract String getContent();
-=======
->>>>>>> parent of 26541c0... Converted UML2Code
+
 }
