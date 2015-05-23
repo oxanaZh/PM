@@ -6,8 +6,40 @@ import java.util.regex.Pattern;
  *
  * @author Steven Yeates
  */
-public class CharacterContent {
+public class CharacterContent extends Token {
 
-    // fill me :)
+    private String content;
 
+    @Override
+    protected Token getToken() {
+        CharacterContent result = new CharacterContent();
+
+        result.setContent(content);
+        return result;
+    }
+
+    @Override
+    protected String htmlStart() {
+        return "<font color=\"green\">";
+    }
+
+    @Override
+    protected String htmlEnd() {
+        return "</font>";
+    }
+
+    @Override
+    protected String getContent() {
+        return content;
+    }
+
+    @Override
+    protected void setContent(String content) {
+        this.content = content;
+    }
+
+    @Override
+    protected Pattern getPattern() {
+        return null;
+    }
 }

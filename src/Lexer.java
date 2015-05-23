@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public class Lexer {
 
-    // fill me :)
+    private List<Token> tokens = new ArrayList<>();
 
     /**
      * Mit dieser Methode werden die Tokenklassen in der gewuenschten
@@ -18,11 +19,10 @@ public class Lexer {
      * einer Liste gespeichert). In dieser Reihenfolge entsprechend werden sie
      * durch die Methode testTokens() abgearbeitet.
      *
-     * @param das
-     *            Token, dass registriert werden soll
+     * @param token das Token, dass registriert werden soll
      */
     public void registerToken(Token token) {
-        // fill me :)
+        tokens.add(token);
     }
 
     /**
@@ -34,11 +34,10 @@ public class Lexer {
      * Tokenklasse geprueft, wenn keine der anderen Tokenklassen gepasst hat und
      * entfernt genau ein Zeichen vom Anfang des Strings.
      *
-     * @param ein
-     *            Token, welches auf genau ein beliebiges Zeichen passt.
+     * @param token ein Token, welches auf genau ein beliebiges Zeichen passt.
      */
     public void registerCatchAll(Token token) {
-        // fill me :)
+        tokens.add(token);
     }
 
     /**
@@ -46,21 +45,34 @@ public class Lexer {
      * der testTokens(String string) Methode. Der String wird komplett in
      * einzelne Token zerlegt, welche anschliessend zurueck gegeben werden.
      *
-     * @param String
-     *            , der lexikalisch untersucht werden soll.
+     * @param string String, der lexikalisch untersucht werden soll.
      * @return alle erkannten Token in einer List
      */
     public List<Token> tokenize(String string) {
+        List<Token> result = new LinkedList<>();
 
-  return null;
-        // fill me :)
+        while (string.length() > 0) {
+            Token current = testTokens(string);
+
+            if (current != null) {
+                string = string.substring(current.getStart(), current.getEnd());
+                result.add(current);
+            }
+        }
+
+        return result;
     }
-    
-    private Token testTokens(String string){
-    	return null;
+
+    private Token testTokens(String string) {
+        for (Token token : tokens) {
+            Token resultToken = token.match(string);
+
+            if (resultToken != null && resultToken.getStart() == 0) {
+                return resultToken;
+            }
+        }
+
+        return null;
     }
-
-
-    // fill me :)
 
 }

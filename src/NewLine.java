@@ -6,8 +6,41 @@ import java.util.regex.Pattern;
  *
  * @author Steven Yeates
  */
-public class NewLine {
+public class NewLine extends Token {
 
-    // fill me :)
+    private String content;
+
+    @Override
+    protected Token getToken() {
+        NewLine result = new NewLine();
+
+        result.setContent(content);
+        return result;
+    }
+
+    @Override
+    protected String htmlStart() {
+        return "";
+    }
+
+    @Override
+    protected String htmlEnd() {
+        return "<br />";
+    }
+
+    @Override
+    protected String getContent() {
+        return content;
+    }
+
+    @Override
+    protected void setContent(String content) {
+        this.content = content;
+    }
+
+    @Override
+    protected Pattern getPattern() {
+        return null;
+    }
 
 }

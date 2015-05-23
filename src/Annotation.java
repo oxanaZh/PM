@@ -9,32 +9,39 @@ import java.util.regex.Pattern;
 
 public class Annotation extends Token {
 
-	private String conten;
+    private String content;
+
 	@Override
 	protected Token getToken() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        Annotation result = new Annotation();
+
+        result.setContent(content);
+        return result;
+    }
 
 	@Override
 	protected String htmlStart() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        return "<font color=\"blue\">";
+    }
 
 	@Override
 	protected String htmlEnd() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        return "</font>";
+    }
 
 	@Override
 	protected String getContent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        return content;
+    }
 
+    @Override
+    protected void setContent(String content) {
+        this.content = content;
+    }
 
-    // fill me :)
+    @Override
+    protected Pattern getPattern() {
+        return null;
+    }
 
 }

@@ -6,8 +6,40 @@ import java.util.regex.Pattern;
  *
  * @author Steven Yeates
  */
-public class MultilineComment {
+public class MultilineComment extends Token {
 
-    // fill me :)
+    private String content;
 
+    @Override
+    protected Token getToken() {
+        MultilineComment result = new MultilineComment();
+
+        result.setContent(content);
+        return result;
+    }
+
+    @Override
+    protected String htmlStart() {
+        return "<i><font color=\"grey\">";
+    }
+
+    @Override
+    protected String htmlEnd() {
+        return "</font></i>";
+    }
+
+    @Override
+    protected String getContent() {
+        return content;
+    }
+
+    @Override
+    protected void setContent(String content) {
+        this.content = content;
+    }
+
+    @Override
+    protected Pattern getPattern() {
+        return null;
+    }
 }
