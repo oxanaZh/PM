@@ -40,6 +40,6 @@ public class CharacterContent extends Token {
 
     @Override
     protected Pattern getPattern() {
-        return null;
+        return Pattern.compile("\'[a-zA-Z]\'");
     }
 }

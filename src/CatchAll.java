@@ -44,6 +44,6 @@ public class CatchAll extends Token {
 
     @Override
     protected Pattern getPattern() {
-        return null;
+        return Pattern.compile(".");
     }
 }

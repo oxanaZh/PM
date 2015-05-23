@@ -45,7 +45,7 @@ public class Annotation extends Token {
 
     @Override
     protected Pattern getPattern() {
-        return Pattern.compile("@([a-z][A-Z])*");
+        return Pattern.compile("@([A-z])+");
     }
 
 }
