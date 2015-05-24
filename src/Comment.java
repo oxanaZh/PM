@@ -44,7 +44,7 @@ public class Comment extends Token {
 
     @Override
     protected Pattern getPattern() {
-        return Pattern.compile("//[\\w ]*");
+        return Pattern.compile("//[\\w ]*" + "[" + Pattern.quote("\n") + "|" + Pattern.quote("\r\n") + "]{0,1}");
     }
 
 }

@@ -35,8 +35,8 @@ public abstract class Token {
         Matcher matcher = getPattern().matcher(string);
 
         if (matcher.find() && matcher.start() == 0) {
-            start = matcher.start();
-            end = matcher.end();
+            this.start = matcher.start();
+            this.end = matcher.end();
             setContent(matcher.group());
         }
 

@@ -12,10 +12,14 @@ public class CharacterContent extends Token {
 
     @Override
     protected Token getToken() {
-        CharacterContent result = new CharacterContent();
+        if(content !=  null) {
+            CharacterContent result = new CharacterContent();
 
-        result.setContent(content);
-        return result;
+            result.setContent(content);
+            return result;
+        }else{
+            return null;
+        }
     }
 
     @Override
@@ -40,6 +44,6 @@ public class CharacterContent extends Token {
 
     @Override
     protected Pattern getPattern() {
-        return Pattern.compile("\'[a-zA-Z]\'");
+        return Pattern.compile(Pattern.quote("'") + "." + Pattern.quote("'"));
     }
 }

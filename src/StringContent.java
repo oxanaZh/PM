@@ -44,6 +44,6 @@ public class StringContent extends Token {
 
     @Override
     protected Pattern getPattern() {
-        return null;
+        return Pattern.compile("\"[.]*\"");
     }
 }

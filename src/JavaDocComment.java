@@ -44,7 +44,7 @@ public class JavaDocComment extends Token {
 
     @Override
     protected Pattern getPattern() {
-        return Pattern.compile("/\\*\\*[\\w]+\\*/");
+        return Pattern.compile("/" + Pattern.quote("**") + ".*" + Pattern.quote("*/"));
     }
 
 }

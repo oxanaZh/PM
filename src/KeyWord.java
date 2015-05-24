@@ -46,7 +46,7 @@ public class KeyWord extends Token {
 
     @Override
     protected Pattern getPattern() {
-        return null;
+        return Pattern.compile("void|import|class|public|private|finally|final|static|return|if|else|while|try|catch");
     }
 
 }
