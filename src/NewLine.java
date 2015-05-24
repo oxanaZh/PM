@@ -44,7 +44,7 @@ public class NewLine extends Token {
 
     @Override
     protected Pattern getPattern() {
-        return Pattern.compile(Pattern.quote("\r\n") + "|" + Pattern.quote("\n"));
+        return Pattern.compile(Pattern.quote("\n"), Pattern.UNIX_LINES);
     }
 
 }

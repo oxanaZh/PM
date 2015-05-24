@@ -33,7 +33,6 @@ public abstract class Token {
      */
     public final Token match(String string) {
         Matcher matcher = getPattern().matcher(string);
-
         if (matcher.find() && matcher.start() == 0) {
             this.start = matcher.start();
             this.end = matcher.end();
