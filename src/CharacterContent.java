@@ -9,14 +9,25 @@ import java.util.regex.Pattern;
 public class CharacterContent extends Token {
 
     private String content;
+    private int length;
+
+    public CharacterContent(String content, int length) {
+        this.content = content;
+        this.length = length;
+    }
+
+    public CharacterContent() {
+    }
+
+    @Override
+    protected int getLength() {
+        return length;
+    }
 
     @Override
     protected Token getToken() {
-        if(content !=  null) {
-            CharacterContent result = new CharacterContent();
-
-            result.setContent(content);
-            return result;
+        if(matcher.find(0) && matcher.start() == 0) {
+        return new CharacterContent(matcher.group(), matcher.end());
         }else{
             return null;
         }
@@ -35,11 +46,6 @@ public class CharacterContent extends Token {
     @Override
     protected String getContent() {
         return content;
-    }
-
-    @Override
-    protected void setContent(String content) {
-        this.content = content;
     }
 
     @Override

@@ -9,17 +9,28 @@ import java.util.regex.Pattern;
 public class CatchAll extends Token {
 
     private String content;
+    private int length;
+
+    public CatchAll(String content, int length) {
+        this.content = content;
+        this.length = length;
+    }
+
+    public CatchAll() {
+    }
+
+    @Override
+    protected int getLength() {
+        return length;
+    }
 
     @Override
     protected Token getToken() {
-        if (content != null) {
-            CatchAll result = new CatchAll();
-
-            result.setContent(content);
-            return result;
+        if (matcher.find(0) && matcher.start() == 0) {
+            return new CatchAll(matcher.group(), matcher.end());
+        } else {
+            return null;
         }
-
-        return null;
     }
 
     @Override
@@ -38,12 +49,7 @@ public class CatchAll extends Token {
     }
 
     @Override
-    protected void setContent(String content) {
-        this.content = content;
-    }
-
-    @Override
     protected Pattern getPattern() {
-        return Pattern.compile(".");
+        return Pattern.compile(".", Pattern.DOTALL);
     }
 }

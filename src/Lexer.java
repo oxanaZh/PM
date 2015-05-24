@@ -55,7 +55,7 @@ public class Lexer {
             Token current = testTokens(string);
 
             if (current != null) {
-                string = string.substring(current.getStart(), current.getEnd());
+                string = string.substring(current.getLength(), string.length());
                 result.add(current);
             }
         }

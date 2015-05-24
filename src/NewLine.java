@@ -9,17 +9,28 @@ import java.util.regex.Pattern;
 public class NewLine extends Token {
 
     private String content;
+    private int length;
+
+    public NewLine(String content, int length) {
+        this.content = content;
+        this.length = length;
+    }
+
+    public NewLine() {
+    }
+
+    @Override
+    protected int getLength() {
+        return length;
+    }
 
     @Override
     protected Token getToken() {
-        if (content != null) {
-            NewLine result = new NewLine();
-
-            result.setContent(content);
-            return result;
+        if(matcher.find(0) && matcher.start() == 0) {
+        return new NewLine(matcher.group(), matcher.end());
+        }else{
+            return null;
         }
-
-        return null;
     }
 
     @Override
@@ -35,11 +46,6 @@ public class NewLine extends Token {
     @Override
     protected String getContent() {
         return content;
-    }
-
-    @Override
-    protected void setContent(String content) {
-        this.content = content;
     }
 
     @Override

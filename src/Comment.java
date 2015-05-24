@@ -9,17 +9,28 @@ import java.util.regex.Pattern;
 public class Comment extends Token {
 
     private String content;
+    private int length;
+
+    public Comment(String content, int length) {
+        this.content = content;
+        this.length = length;
+    }
+
+    public Comment() {
+    }
+
+    @Override
+    protected int getLength() {
+        return length;
+    }
 
     @Override
     protected Token getToken() {
-        if (content != null) {
-            Comment result = new Comment();
-
-            result.setContent(content);
-            return result;
+        if(matcher.find(0) && matcher.start() == 0) {
+        return new Comment(matcher.group(), matcher.end());
+        }else{
+            return null;
         }
-
-        return null;
     }
 
     @Override
@@ -35,11 +46,6 @@ public class Comment extends Token {
     @Override
     protected String getContent() {
         return content;
-    }
-
-    @Override
-    protected void setContent(String content) {
-        this.content = content;
     }
 
     @Override

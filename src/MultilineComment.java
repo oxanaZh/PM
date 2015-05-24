@@ -9,17 +9,28 @@ import java.util.regex.Pattern;
 public class MultilineComment extends Token {
 
     private String content;
+    private int length;
+
+    public MultilineComment(String content, int length) {
+        this.content = content;
+        this.length = length;
+    }
+
+    public MultilineComment() {
+    }
+
+    @Override
+    protected int getLength() {
+        return length;
+    }
 
     @Override
     protected Token getToken() {
-        if (content != null) {
-            MultilineComment result = new MultilineComment();
-
-            result.setContent(content);
-            return result;
+        if(matcher.find(0) && matcher.start() == 0) {
+        return new MultilineComment(matcher.group(), matcher.end());
+        }else{
+            return null;
         }
-
-        return null;
     }
 
     @Override
@@ -35,11 +46,6 @@ public class MultilineComment extends Token {
     @Override
     protected String getContent() {
         return content;
-    }
-
-    @Override
-    protected void setContent(String content) {
-        this.content = content;
     }
 
     @Override

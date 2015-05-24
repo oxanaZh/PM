@@ -9,17 +9,28 @@ import java.util.regex.Pattern;
 public class JavaDocComment extends Token {
 
     private String content;
+    private int length;
+
+    public JavaDocComment(String content, int length) {
+        this.content = content;
+        this.length = length;
+    }
+
+    public JavaDocComment() {
+    }
+
+    @Override
+    protected int getLength() {
+        return length;
+    }
 
     @Override
     protected Token getToken() {
-        if (content != null) {
-            JavaDocComment result = new JavaDocComment();
-
-            result.setContent(content);
-            return result;
+        if(matcher.find(0) && matcher.start() == 0) {
+        return new JavaDocComment(matcher.group(), matcher.end());
+        }else{
+            return null;
         }
-
-        return null;
     }
 
     @Override
@@ -38,13 +49,8 @@ public class JavaDocComment extends Token {
     }
 
     @Override
-    protected void setContent(String content) {
-        this.content = content;
-    }
-
-    @Override
     protected Pattern getPattern() {
-        return Pattern.compile("/" + Pattern.quote("**") + ".*" + Pattern.quote("*/"), Pattern.DOTALL);
+        return Pattern.compile("/" + Pattern.quote("**") + ".*?" + Pattern.quote("*/"), Pattern.DOTALL);
     }
 
 }

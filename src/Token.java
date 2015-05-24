@@ -11,8 +11,8 @@ import java.util.regex.Pattern;
  */
 public abstract class Token {
 
-    private int start;
-    private int end;
+    protected Pattern pattern;
+    protected Matcher matcher;
 
     /**
      * Die Methode match() ist in der abstrakten Basisklasse implementiert
@@ -32,13 +32,11 @@ public abstract class Token {
      * @return Instanz der konkreten Tokenklasse, null wenn kein Match gefunden wurde.
      */
     public final Token match(String string) {
-        Matcher matcher = getPattern().matcher(string);
-        if (matcher.find() && matcher.start() == 0) {
-            this.start = matcher.start();
-            this.end = matcher.end();
-            setContent(matcher.group());
+        if(pattern == null){
+            pattern = getPattern();
         }
 
+        matcher = pattern.matcher(string);
         return getToken();
     }
 
@@ -53,13 +51,7 @@ public abstract class Token {
         return htmlStart() + getContent() + htmlEnd();
     }
 
-    public int getStart() {
-        return start;
-    }
-
-    public int getEnd() {
-        return end;
-    }
+    protected abstract int getLength();
 
     protected abstract Token getToken();
 
@@ -68,8 +60,6 @@ public abstract class Token {
 	protected abstract String htmlEnd();
 
 	protected abstract String getContent();
-
-    protected abstract void setContent(String content);
 
     protected abstract Pattern getPattern();
 
