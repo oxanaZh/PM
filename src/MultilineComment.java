@@ -50,6 +50,6 @@ public class MultilineComment extends Token {
 
     @Override
     protected Pattern getPattern() {
-        return Pattern.compile("/" + Pattern.quote("*") + ".*" + Pattern.quote("*") + "/", Pattern.DOTALL);
+        return Pattern.compile("/" + Pattern.quote("*") + ".*?" + Pattern.quote("*") + "/", Pattern.DOTALL);
     }
 }
