@@ -67,7 +67,7 @@ public class Lexer {
         for (Token token : tokens) {
             Token resultToken = token.match(string);
 
-            if (resultToken != null && resultToken.getStart() == 0) {
+            if (resultToken != null) {
                 return resultToken;
             }
         }

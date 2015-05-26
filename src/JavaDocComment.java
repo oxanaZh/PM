@@ -12,10 +12,14 @@ public class JavaDocComment extends Token {
 
     @Override
     protected Token getToken() {
-        JavaDocComment result = new JavaDocComment();
+        if (content != null) {
+            JavaDocComment result = new JavaDocComment();
 
-        result.setContent(content);
-        return result;
+            result.setContent(content);
+            return result;
+        }
+
+        return null;
     }
 
     @Override

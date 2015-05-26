@@ -14,10 +14,14 @@ public class KeyWord extends Token {
 
     @Override
     protected Token getToken() {
-        KeyWord result = new KeyWord();
+        if (content != null) {
+            KeyWord result = new KeyWord();
 
-        result.setContent(content);
-        return result;
+            result.setContent(content);
+            return result;
+        }
+
+        return null;
     }
 
     @Override

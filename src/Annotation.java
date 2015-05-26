@@ -13,10 +13,14 @@ public class Annotation extends Token {
 
 	@Override
 	protected Token getToken() {
-        Annotation result = new Annotation();
+        if (content != null) {
+            Annotation result = new Annotation();
 
-        result.setContent(content);
-        return result;
+            result.setContent(content);
+            return result;
+        }
+
+        return null;
     }
 
 	@Override
@@ -41,7 +45,7 @@ public class Annotation extends Token {
 
     @Override
     protected Pattern getPattern() {
-        return null;
+        return Pattern.compile("@([a-z][A-Z])*");
     }
 
 }

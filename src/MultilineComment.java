@@ -12,10 +12,14 @@ public class MultilineComment extends Token {
 
     @Override
     protected Token getToken() {
-        MultilineComment result = new MultilineComment();
+        if (content != null) {
+            MultilineComment result = new MultilineComment();
 
-        result.setContent(content);
-        return result;
+            result.setContent(content);
+            return result;
+        }
+
+        return null;
     }
 
     @Override

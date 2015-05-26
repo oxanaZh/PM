@@ -12,10 +12,14 @@ public class StringContent extends Token {
 
     @Override
     protected Token getToken() {
-        StringContent result = new StringContent();
+        if (content != null) {
+            StringContent result = new StringContent();
 
-        result.setContent(content);
-        return result;
+            result.setContent(content);
+            return result;
+        }
+
+        return null;
     }
 
     @Override

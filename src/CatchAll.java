@@ -12,10 +12,14 @@ public class CatchAll extends Token {
 
     @Override
     protected Token getToken() {
-        CatchAll result = new CatchAll();
+        if (content != null) {
+            CatchAll result = new CatchAll();
 
-        result.setContent(content);
-        return result;
+            result.setContent(content);
+            return result;
+        }
+
+        return null;
     }
 
     @Override

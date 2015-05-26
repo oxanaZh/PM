@@ -12,10 +12,14 @@ public class Comment extends Token {
 
     @Override
     protected Token getToken() {
-        Comment result = new Comment();
+        if (content != null) {
+            Comment result = new Comment();
 
-        result.setContent(content);
-        return result;
+            result.setContent(content);
+            return result;
+        }
+
+        return null;
     }
 
     @Override

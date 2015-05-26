@@ -12,10 +12,14 @@ public class NewLine extends Token {
 
     @Override
     protected Token getToken() {
-        NewLine result = new NewLine();
+        if (content != null) {
+            NewLine result = new NewLine();
 
-        result.setContent(content);
-        return result;
+            result.setContent(content);
+            return result;
+        }
+
+        return null;
     }
 
     @Override

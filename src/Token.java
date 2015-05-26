@@ -34,14 +34,13 @@ public abstract class Token {
     public final Token match(String string) {
         Matcher matcher = getPattern().matcher(string);
 
-        if (matcher.find()) {
+        if (matcher.find() && matcher.start() == 0) {
             start = matcher.start();
             end = matcher.end();
             setContent(matcher.group());
-            return getToken();
-        } else {
-            return null;
         }
+
+        return getToken();
     }
 
     /**
