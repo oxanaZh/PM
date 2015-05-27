@@ -50,7 +50,7 @@ public class JavaDocComment extends Token {
 
     @Override
     protected Pattern getPattern() {
-        return Pattern.compile("/" + Pattern.quote("**") + ".*?" + Pattern.quote("*/"), Pattern.DOTALL);
+        return Pattern.compile("/" + Pattern.quote("**") + ".*?" + Pattern.quote("*/"), Pattern.UNIX_LINES | Pattern.DOTALL);
     }
 
 }
