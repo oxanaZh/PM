@@ -70,7 +70,7 @@ public class HTMLViewer extends JFrame {
         for (Token token : lexer.tokenize(inputField.getText())) {
 
             s += token.getHtml();
-            System.out.println("token.getContent() = " + token.getContent());
+
         }
 
         } catch (Lexer.NoCatchAllException e) {
