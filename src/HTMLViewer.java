@@ -12,10 +12,8 @@ public class HTMLViewer extends JFrame {
 
     JPanel panelUserControl = new JPanel();
     JPanel panelHTML = new JPanel();
-    JTextPane HTMLContent = new JTextPane();
+    JTextPane HTMLOutput = new JTextPane();
     JTextPane inputField = new JTextPane();
-    //HTMLEditorKit editorKit = new HTMLEditorKit();
-   // HTMLDocument document = new HTMLDocument();
 
 
     Lexer lexer;
@@ -32,29 +30,26 @@ public class HTMLViewer extends JFrame {
             revalidate();
         });
 
-        HTMLContent.setContentType("text/html");
-        HTMLContent.setEditable(false);
-       // HTMLContent.setEditorKit(editorKit);
-       // HTMLContent.setDocument(document);
+        HTMLOutput.setContentType("text/html");
+        HTMLOutput.setEditable(false);
+
         setSize(1024, 768);
         setLayout(new GridLayout(2,1,0,30));
-        //content.setSize(640, 480);
+
         panelHTML.setBorder(BorderFactory.createLineBorder(Color.black));
         panelHTML.setLayout(new BorderLayout());
 
         panelUserControl.setBorder(BorderFactory.createLineBorder(Color.black));
         panelUserControl.setLayout(new BorderLayout());
-       //panelUserControl.setPreferredSize(new Dimension(0,220));
 
 
         panelHTML.setPreferredSize(new Dimension(0,220));
-        //panelUserControl.setMaximumSize(new Dimension(320, 240));
 
         add(panelHTML);
         add(panelUserControl);
 
 
-        panelHTML.add(new JScrollPane(HTMLContent));
+        panelHTML.add(new JScrollPane(HTMLOutput));
 
         panelUserControl.add(new JScrollPane(inputField), BorderLayout.CENTER);
         panelUserControl.add(refreshButton, BorderLayout.SOUTH);
@@ -80,11 +75,10 @@ public class HTMLViewer extends JFrame {
 
         } catch (Lexer.NoCatchAllException e) {
             errorMessage(e.getMessage());
-            s = HTMLContent.getText();
+            s = HTMLOutput.getText();
         }
         finally {
-            HTMLContent.setText(s);
-            System.out.println(s);
+            HTMLOutput.setText(s);
         }
     }
 
