@@ -1,7 +1,4 @@
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.text.html.HTMLDocument;
-import javax.swing.text.html.HTMLEditorKit;
 import java.awt.*;
 
 
@@ -70,7 +67,7 @@ public class HTMLViewer extends JFrame {
         for (Token token : lexer.tokenize(inputField.getText())) {
 
             s += token.getHtml();
-
+            System.out.println("token.getContent() = " + token.getContent());
         }
 
         } catch (Lexer.NoCatchAllException e) {

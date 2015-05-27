@@ -93,6 +93,11 @@ public class Lexer {
         }
         return false;
     }
+
+    /**
+     * Eine Exception die geworfen wird, falls versucht wird tokenize aufzurufen ohne vorher ein CatchAll registriert zu haben.
+     * @see CatchAll
+     */
     public class NoCatchAllException extends Exception{
 
         public NoCatchAllException(){

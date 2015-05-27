@@ -51,16 +51,40 @@ public abstract class Token {
         return htmlStart() + getContent() + htmlEnd();
     }
 
+    /**
+     * Gibt die Länge des gematchden Strings zurück
+     * @return Länge des Strings
+     */
     protected abstract int getLength();
 
+    /**
+     * Erstellt nach dem Template Method Pattern ein passendes Token
+     * @return Das Token
+     */
     protected abstract Token getToken();
 
+    /**
+     * Gibt die öffnenden Html Tags für dieses Token zurück
+     * @return Ein String aus den Html Tags
+     */
 	protected abstract String htmlStart();
 
+    /**
+     * Gibt die schließenden Html Tags für dieses Token zurück
+     * @return Ein String aus den Html Tags
+     */
 	protected abstract String htmlEnd();
 
+    /**
+     * Gibt den Text dieses Tokens zurück
+     * @return Den Text als String
+     */
 	protected abstract String getContent();
 
+    /**
+     * Gibt das Pattern dieses Tokens zurück
+     * @return Das Pattern Objekt dieses Tokens
+     */
     protected abstract Pattern getPattern();
 
 }

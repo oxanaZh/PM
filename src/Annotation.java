@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
  *
  * @author Steven Yeates
  */
-
 public class Annotation extends Token {
 
     private String content;
@@ -20,11 +19,17 @@ public class Annotation extends Token {
     public Annotation() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int getLength() {
         return length;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
 	protected Token getToken() {
         if(matcher.find(0) && matcher.start() == 0) {
@@ -34,21 +39,33 @@ public class Annotation extends Token {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	protected String htmlStart() {
         return "<font color=\"blue\">";
     }
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	protected String htmlEnd() {
         return "</font>";
     }
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	protected String getContent() {
         return content;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Pattern getPattern() {
         return Pattern.compile("@([A-z])+");

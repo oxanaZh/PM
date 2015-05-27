@@ -21,11 +21,17 @@ public class KeyWord extends Token {
     public KeyWord() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int getLength() {
         return length;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Token getToken() {
         if(matcher.find(0) && matcher.start() == 0) {
@@ -35,21 +41,33 @@ public class KeyWord extends Token {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String htmlStart() {
         return "<font color=\"red\"><b>";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String htmlEnd() {
         return "</b></font>";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String getContent() {
         return content;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Pattern getPattern() {
         return Pattern.compile("void|import|class|public|private|finally|final|static|return|if|else|while|try|catch");

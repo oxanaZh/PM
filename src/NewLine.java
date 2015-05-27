@@ -18,12 +18,17 @@ public class NewLine extends Token {
 
     public NewLine() {
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int getLength() {
         return length;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Token getToken() {
         if(matcher.find(0) && matcher.start() == 0) {
@@ -33,21 +38,33 @@ public class NewLine extends Token {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String htmlStart() {
         return "";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String htmlEnd() {
         return "<br />";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String getContent() {
         return content;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Pattern getPattern() {
         return Pattern.compile(Pattern.quote("\n"), Pattern.UNIX_LINES);

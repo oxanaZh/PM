@@ -16,6 +16,5 @@ public class Main {
 		lexer.registerCatchAll(new CatchAll());
 
 		HTMLViewer viewer = new HTMLViewer(lexer);
-		//System.out.println(	"blablabla");
 	}
 }

@@ -19,11 +19,17 @@ public class JavaDocComment extends Token {
     public JavaDocComment() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int getLength() {
         return length;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Token getToken() {
         if(matcher.find(0) && matcher.start() == 0) {
@@ -33,21 +39,33 @@ public class JavaDocComment extends Token {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String htmlStart() {
         return "<font color=\"blue\">";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String htmlEnd() {
         return "</font>";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String getContent() {
         return content;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Pattern getPattern() {
         return Pattern.compile("/" + Pattern.quote("**") + ".*?" + Pattern.quote("*/"), Pattern.UNIX_LINES | Pattern.DOTALL);

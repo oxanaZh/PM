@@ -19,11 +19,17 @@ public class StringContent extends Token {
     public StringContent() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int getLength() {
         return length;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Token getToken() {
         if(matcher.find(0) && matcher.start() == 0) {
@@ -33,21 +39,33 @@ public class StringContent extends Token {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String htmlStart() {
         return "<font color=\"green\">";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String htmlEnd() {
         return "</font>";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String getContent() {
         return content;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Pattern getPattern() {
         return Pattern.compile("\".*\"");

@@ -19,11 +19,17 @@ public class Comment extends Token {
     public Comment() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int getLength() {
         return length;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Token getToken() {
         if(matcher.find(0) && matcher.start() == 0) {
@@ -33,25 +39,36 @@ public class Comment extends Token {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String htmlStart() {
         return "<i><font color=\"grey\">";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String htmlEnd() {
         return "</i></font><br />";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String getContent() {
         return content;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Pattern getPattern() {
-       // return Pattern.compile("//[\\w ]*" + "[" + Pattern.quote("\n") + Pattern.quote("\r\n") + "]{0,1}");
-        return Pattern.compile("//.*\\n?\\r?");
+        return Pattern.compile("//[\\w ]*" + "[" + Pattern.quote("\n") + Pattern.quote("\r\n") + "]{0,1}");
     }
 
 }
