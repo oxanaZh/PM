@@ -50,6 +50,6 @@ public class StringContent extends Token {
 
     @Override
     protected Pattern getPattern() {
-        return Pattern.compile("\".*\"", Pattern.DOTALL);
+        return Pattern.compile("\".*\"");
     }
 }

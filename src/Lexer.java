@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -78,9 +79,16 @@ public class Lexer {
     }
 
     private boolean hasCatchAll(){
-        for (Token token : tokens) {
-            if (token instanceof CatchAll){
-                return true;
+        if (tokens.get(tokens.size()-1) instanceof CatchAll){
+            return true;
+        } else {
+            for (Iterator<Token> itr = tokens.iterator(); itr.hasNext(); ) {
+                Token next =  itr.next();
+                if (next instanceof CatchAll){
+                    itr.remove();
+                    tokens.add(next);
+                    return true;
+                }
             }
         }
         return false;

@@ -36,7 +36,6 @@ public class HTMLViewer extends JFrame {
         HTMLContent.setEditable(false);
        // HTMLContent.setEditorKit(editorKit);
        // HTMLContent.setDocument(document);
-        HTMLContent.getDocument().putProperty("IgnoreCharsetDirective", true);
         setSize(1024, 768);
         setLayout(new GridLayout(2,1,0,30));
         //content.setSize(640, 480);
@@ -76,6 +75,7 @@ public class HTMLViewer extends JFrame {
         for (Token token : lexer.tokenize(inputField.getText())) {
 
             s += token.getHtml();
+            System.out.println("token.getContent() = " + token.getContent());
         }
 
         } catch (Lexer.NoCatchAllException e) {
