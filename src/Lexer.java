@@ -78,7 +78,7 @@ public class Lexer {
         return null;
     }
 
-    private boolean hasCatchAll(){
+    protected boolean hasCatchAll(){
         if (tokens.get(tokens.size()-1) instanceof CatchAll){
             return true;
         } else {
