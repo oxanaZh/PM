@@ -1,37 +1,42 @@
+
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * Created by Patrick on 28.05.2015.
  */
 public class NewLineTest {
+    NewLine newLine;
 
+    @Before
+    public void setUp() {this.newLine = new NewLine();}
     @Test
-    public void testGetLength() throws Exception {
+    public void testGetLength() {
 
     }
 
     @Test
-    public void testGetToken() throws Exception {
+    public void testGetToken() {
 
     }
 
     @Test
-    public void testHtmlStart() throws Exception {
+    public void testHtmlStart() {
 
     }
 
     @Test
-    public void testHtmlEnd() throws Exception {
+    public void testHtmlEnd() {
 
     }
 
     @Test
-    public void testGetContent() throws Exception {
+    public void testGetContent() {
 
     }
 
     @Test
-    public void testGetPattern() throws Exception {
+    public void testGetPattern() {
 
     }
 }
