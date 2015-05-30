@@ -49,11 +49,15 @@ public class Lexer {
      * @param string String, der lexikalisch untersucht werden soll.
      * @return alle erkannten Token in einer List
      */
-    public List<Token> tokenize(String string) throws NoCatchAllException {
+    public List<Token> tokenize(String string) throws NoCatchAllException, NoTokenException {
         List<Token> result = new LinkedList<>();
+        if(tokens.isEmpty()){
+            throw new NoTokenException();
+        }
         if(!hasCatchAll()){
             throw new NoCatchAllException();
         }
+
         while (string.length() > 0) {
             Token current = testTokens(string);
 
@@ -102,6 +106,11 @@ public class Lexer {
 
         public NoCatchAllException(){
             super("Lexer must contains a CatchAll-Token");
+        }
+    }
+    public class NoTokenException extends Exception{
+        public NoTokenException() {
+            super("Lexer must contain at least one Token");
         }
     }
 }

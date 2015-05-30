@@ -69,25 +69,48 @@ public class HTMLViewer extends JFrame {
             s += token.getHtml();
             System.out.println("token.getContent() = " + token.getContent());
         }
-
-        } catch (Lexer.NoCatchAllException e) {
-            errorMessage(e.getMessage());
-            s = HTMLOutput.getText();
+        } catch (Lexer.NoTokenException e){
+            errorNoToken(e.getMessage());
         }
+         catch (Lexer.NoCatchAllException e) {
+             errorNoCatchAll(e.getMessage());
+         }
         finally {
             HTMLOutput.setText(s);
         }
     }
 
 
-    private void errorMessage(String message){
-        Object[] options = { "Add NoCatchAllToken", "CANCEL" };
+    private void errorNoCatchAll(String message){
+        Object[] options = { "Add NoCatchAllToken", "Exit" };
         int result;
         result = JOptionPane.showOptionDialog(null, message, "Warning", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
         if (result == JOptionPane.YES_OPTION){
             lexer.registerCatchAll(new CatchAll());
+        } else {
+            dispose();
         }
     }
+    private void errorNoToken(String message){
+    Object[] options = { "Add recommended token", "Exit" };
+    int result;
+        message+= "\nDo you want to add recommended token to tokenize java source code?";
+    result = JOptionPane.showOptionDialog(null, message, "Warning", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+    if (result == JOptionPane.YES_OPTION){
+            lexer.registerToken(new KeyWord());
+            lexer.registerToken(new JavaDocComment());
+            lexer.registerToken(new MultilineComment());
+            lexer.registerToken(new Comment());
+            lexer.registerToken(new Annotation());
+            lexer.registerToken(new StringContent());
+            lexer.registerToken(new CharacterContent());
+            lexer.registerToken(new NewLine());
+            lexer.registerCatchAll(new CatchAll());
+
+    } else {
+        dispose();
+    }
+}
 
 
 }
