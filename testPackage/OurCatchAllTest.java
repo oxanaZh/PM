@@ -2,21 +2,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Patrick on 28.05.2015.
  */
-public class CatchAllTest {
+public class OurCatchAllTest {
     CatchAll catchAll;
 
     @Before
     public void setUp() {this.catchAll = new CatchAll();}
     @Test
     public void testGetLength() {
-        assertEquals(1, ((CatchAll) catchAll.match("a\n")).getLength());
-        assertEquals(1, ((CatchAll) catchAll.match("a")).getLength());
+        assertEquals(1, catchAll.match("a\n").getLength());
+        assertEquals(1, catchAll.match("a").getLength());
     }
 
     @Test

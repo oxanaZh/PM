@@ -2,21 +2,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Patrick on 28.05.2015.
  */
-public class KeyWordTest {
+public class OurKeyWordTest {
     KeyWord keyWord;
 
     @Before
     public void setUp() {this.keyWord = new KeyWord();}
     @Test
     public void testGetLength() {
-        assertEquals(6, ((KeyWord) keyWord.match("public\n")).getLength());
-        assertEquals(6, ((KeyWord) keyWord.match("public")).getLength());
+        assertEquals(6, keyWord.match("public\n").getLength());
+        assertEquals(6, keyWord.match("public").getLength());
     }
 
     @Test

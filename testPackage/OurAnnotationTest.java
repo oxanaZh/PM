@@ -1,4 +1,3 @@
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -7,7 +6,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Patrick on 28.05.2015.
  */
-public class AnnotationTest {
+public class OurAnnotationTest {
     Annotation annotation;
 
     @Before
@@ -17,8 +16,8 @@ public class AnnotationTest {
 
     @Test
     public void testGetLength() {
-        assertEquals(9, ((Annotation) annotation.match("@Override\n")).getLength());
-        assertEquals(9, ((Annotation) annotation.match("@Override")).getLength());
+        assertEquals(9, annotation.match("@Override\n").getLength());
+        assertEquals(9, annotation.match("@Override").getLength());
     }
 
     @Test

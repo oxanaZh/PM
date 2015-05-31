@@ -2,21 +2,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Patrick on 28.05.2015.
  */
-public class CommentTest {
+public class OurCommentTest {
     Comment comment;
 
     @Before
     public void setUp() {this.comment = new Comment();}
     @Test
     public void testGetLength() {
-        assertEquals(20, ((Comment) comment.match("//here is a comment\n")).getLength());
-        assertEquals(19, ((Comment) comment.match("//here is a comment")).getLength());
+        assertEquals(20, comment.match("//here is a comment\n").getLength());
+        assertEquals(19, comment.match("//here is a comment").getLength());
     }
 
     @Test

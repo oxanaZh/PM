@@ -1,23 +1,20 @@
-
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Patrick on 28.05.2015.
  */
-public class NewLineTest {
+public class OurNewLineTest {
     NewLine newLine;
 
     @Before
     public void setUp() {this.newLine = new NewLine();}
     @Test
     public void testGetLength() {
-        assertEquals(1, ((NewLine) newLine.match("\n\n")).getLength());
-        assertEquals(1, ((NewLine) newLine.match("\n")).getLength());
+        assertEquals(1, newLine.match("\n\n").getLength());
+        assertEquals(1, newLine.match("\n").getLength());
     }
 
     @Test

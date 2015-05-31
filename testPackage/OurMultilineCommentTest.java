@@ -2,21 +2,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Patrick on 28.05.2015.
  */
-public class MultilineCommentTest {
+public class OurMultilineCommentTest {
     MultilineComment multilineComment;
 
     @Before
     public void setUp() {this.multilineComment = new MultilineComment();}
     @Test
     public void testGetLength() {
-        assertEquals(33, ((MultilineComment) multilineComment.match("/*here\n is\n a\n multilineComment*/")).getLength());
-        assertEquals(33, ((MultilineComment) multilineComment.match("/*here\n is\n a\n multilineComment*///and a Comment")).getLength());
+        assertEquals(33, multilineComment.match("/*here\n is\n a\n multilineComment*/").getLength());
+        assertEquals(33, multilineComment.match("/*here\n is\n a\n multilineComment*///and a Comment").getLength());
     }
 /*
 

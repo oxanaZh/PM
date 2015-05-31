@@ -7,7 +7,7 @@ import static org.junit.Assert.assertNotNull;
 /**
  * Created by Patrick on 28.05.2015.
  */
-public class LexerTest {
+public class OurLexerTest {
     Lexer lexer;
     Exception noTokenException, noCatchAllException;
     @Before

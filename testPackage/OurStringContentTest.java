@@ -2,21 +2,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Patrick on 28.05.2015.
  */
-public class StringContentTest {
+public class OurStringContentTest {
     StringContent stringContent;
 
     @Before
     public void setUp() {this.stringContent = new StringContent();}
     @Test
     public void testGetLength() {
-        assertEquals(15, ((StringContent) stringContent.match("\"ExampleString\"\n")).getLength());
-        assertEquals(15, ((StringContent) stringContent.match("\"ExampleString\"")).getLength());
+        assertEquals(15, stringContent.match("\"ExampleString\"\n").getLength());
+        assertEquals(15, stringContent.match("\"ExampleString\"").getLength());
     }
 
     @Test

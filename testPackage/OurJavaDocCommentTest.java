@@ -2,21 +2,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Patrick on 28.05.2015.
  */
-public class JavaDocCommentTest {
+public class OurJavaDocCommentTest {
     JavaDocComment javaDocComment;
 
     @Before
     public void setUp() {this.javaDocComment = new JavaDocComment();}
     @Test
     public void testGetLength() {
-        assertEquals(71, ((JavaDocComment) javaDocComment.match("/**\n*Ich\n *bin\n *ein\n *javadoc\n *kommentar\n *@return Match-Ergebnis\n**/")).getLength());
-        assertEquals(71, ((JavaDocComment) javaDocComment.match("/**\n*Ich\n *bin\n *ein\n *javadoc\n *kommentar\n *@return Match-Ergebnis\n**///IchbinkeinJavadocKommentar")).getLength());
+        assertEquals(71, javaDocComment.match("/**\n*Ich\n *bin\n *ein\n *javadoc\n *kommentar\n *@return Match-Ergebnis\n**/").getLength());
+        assertEquals(71, javaDocComment.match("/**\n*Ich\n *bin\n *ein\n *javadoc\n *kommentar\n *@return Match-Ergebnis\n**///IchbinkeinJavadocKommentar").getLength());
     }
     /*
     

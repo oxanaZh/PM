@@ -2,21 +2,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Patrick on 28.05.2015.
  */
-public class CharacterContentTest {
+public class OurCharacterContentTest {
     CharacterContent characterContent;
 
     @Before
     public void setUp() {this.characterContent = new CharacterContent();}
     @Test
     public void testGetLength() {
-        assertEquals(3, ((CharacterContent) characterContent.match("'A'\n")).getLength());
-        assertEquals(3, ((CharacterContent) characterContent.match("'A'")).getLength());
+        assertEquals(3, characterContent.match("'A'\n").getLength());
+        assertEquals(3, characterContent.match("'A'").getLength());
     }
 
     @Test

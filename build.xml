@@ -1,77 +1,74 @@
 <project name="Sportliga" default="clean" basedir=".">
 
-	<property name="build.dir" value="build" />
-	<tstamp>
-		<format property="time.stamp" pattern="yyyy-MM-dd_HH-mm-ss" />
-	</tstamp>
-	<property name="dist.dir" value="dist/${time.stamp}" />
+    <property name="build.dir" value="build"/>
+    <tstamp>
+        <format property="time.stamp" pattern="yyyy-MM-dd_HH-mm-ss"/>
+    </tstamp>
+    <property name="dist.dir" value="dist/${time.stamp}"/>
 
-	<path id="junit.class.path">
-		<pathelement location="lib/junit-4.7.jar" />
-		<pathelement location="${build.dir}" />
-	</path>
+    <path id="junit.class.path">
+        <pathelement location="lib/junit-4.7.jar"/>
+        <pathelement location="${build.dir}"/>
+    </path>
 
 
-	<target name="init">
-		<delete dir="dist" />
-		<delete dir="${build.dir}" />
-		<mkdir dir="${build.dir}" />
-		<mkdir dir="dist" />
-		<mkdir dir="${dist.dir}" />
-		<mkdir dir="${dist.dir}/doc" />
-		<mkdir dir="${dist.dir}/test" />
-	</target>
+    <target name="init">
+        <delete dir="dist"/>
+        <delete dir="${build.dir}"/>
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="dist"/>
+        <mkdir dir="${dist.dir}"/>
+        <mkdir dir="${dist.dir}/doc"/>
+        <mkdir dir="${dist.dir}/test"/>
+    </target>
 
-	<target name="compile" depends="init">
-		<javac srcdir="src" destdir="${build.dir}" includeantruntime="false"/>
-		</target>
-	<!--
-	<javac srcdir="test" destdir="${build.dir}" includeantruntime="false">
-			<classpath refid="junit.class.path" />
-		</javac>
+    <target name="compile" depends="init">
+        <javac srcdir="src" destdir="${build.dir}" includeantruntime="false"/>
+        <javac srcdir="testPackage" destdir="${build.dir}" includeantruntime="false">
+            <classpath refid="junit.class.path"/>
+        </javac>
+    </target>
 
-	</target>
+    <target name="test" depends="compile">
+        <junit haltonfailure="true" printsummary="true">
+            <classpath refid="junit.class.path"/>
+            <formatter type="xml"/>
+            <test name="TestAllOur" todir="${dist.dir}/test"/>
+        </junit>
+    </target>
 
-	<target name="test" depends="compile">
-		<junit haltonfailure="true" printsummary="true">
-			<classpath refid="junit.class.path" />
-			<formatter type="xml" />
-			<test name="TestAll" todir="${dist.dir}/test" />
-		</junit>
-	</target> -->
+    <target name="jar" depends="compile, test">
+        <jar basedir="${build.dir}" destfile="${build.dir}/tokenizer.jar">
+            <manifest>
+                <attribute name="Main-Class" value="Main"/>
+            </manifest>
+            <zipgroupfileset dir="lib">
+                <exclude name="junit**"/>
+                <exclude name="tests**"/>
+            </zipgroupfileset>
+            <exclude name="**/**Test**"/>
+        </jar>
+    </target>
 
-	<target name="jar" depends="compile">
-		<jar basedir="${build.dir}" destfile="${build.dir}/tokenizer.jar">
-			<manifest>
-				<attribute name="Main-Class" value="Main" />
-			</manifest>
-			<zipgroupfileset dir="lib">
-				<exclude name="jUnit**" />
-				<exclude name="tests**" />
-			</zipgroupfileset>
-			<exclude name="**/**Test**" />
-		</jar>
-	</target>
+    <target name="doc" depends="init">
+        <javadoc destdir="build/doc">
 
-	<target name="doc" depends="init">
-		<javadoc destdir="build/doc">
+            <classpath refid="junit.class.path"/>
 
-			<classpath refid="junit.class.path" />
+            <fileset dir="src">
+                <exclude name=".placeholder"/>
+            </fileset>
+        </javadoc>
+    </target>
 
-			<fileset dir="src">
-				<exclude name=".placeholder" />
-			</fileset>
-		</javadoc>
-	</target>
+    <target name="dist" depends="jar, doc">
+        <copy file="${build.dir}/tokenizer.jar" todir="${dist.dir}"/>
+        <copy toDir="${dist.dir}/doc">
+            <fileset dir="${build.dir}/doc" includes="**"/>
+        </copy>
+    </target>
 
-	<target name="dist" depends="jar, doc">
-		<copy file="${build.dir}/tokenizer.jar" todir="${dist.dir}" />
-		<copy toDir="${dist.dir}/doc">
-			<fileset dir="${build.dir}/doc" includes="**" />
-		</copy>
-	</target>
-
-	<target name="clean" depends="dist">
-		<delete dir="${build.dir}" />
-	</target>
+    <target name="clean" depends="dist">
+        <delete dir="${build.dir}"/>
+    </target>
 </project>
