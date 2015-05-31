@@ -1,4 +1,4 @@
-<project name="Sportliga" default="clean" basedir=".">
+<project name="PMLexer" default="clean" basedir=".">
 
     <property name="build.dir" value="build"/>
     <tstamp>
