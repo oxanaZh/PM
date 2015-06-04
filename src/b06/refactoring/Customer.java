@@ -20,7 +20,7 @@ public class Customer {
         rentals.add(rental);
     }
 
-    public String statement() {
+    public String generateStatement() {
         double totalAmount = 0;
         int frequentRenterPoints = 0;
 
@@ -67,7 +67,7 @@ public class Customer {
 
         return result;
     }
-    public String htmlStatement() {
+    public String generateHtmlStatement() {
         double totalAmount = 0;
         int frequentRenterPoints = 0;
 
