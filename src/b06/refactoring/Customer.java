@@ -28,7 +28,7 @@ public class Customer {
 
         String result = "Rental record for " + getName() + "\n";
         for (Rental rental : rentalList) {
-            double amount = amountChecker.getAmount(rental, AmountChecker.checkPriceCode(rental));
+            double amount = AmountChecker.checkPriceCode(rental);
 
             // add frequent renter points
             frequentRenterPoints++;
@@ -54,7 +54,7 @@ public class Customer {
 
         String result = "<h1>Rental record for <b>" + getName() + "</b></h1>\n";
         for (Rental rental : rentalList) {
-            double amount = amountChecker.getAmount(rental, AmountChecker.checkPriceCode(rental));
+            double amount = AmountChecker.checkPriceCode(rental);
 
             // add frequent renter points
             frequentRenterPoints++;

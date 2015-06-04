@@ -19,10 +19,10 @@ public class AmountChecker {
             default:
                 amount = 0;
         }
-        return amount;
+        return getAmount(rental,amount);
     }
 
-    double getAmount(Rental rental, double amount) {
+    private static double getAmount(Rental rental, double amount) {
         if (rental.getMovie().getPriceCode() != Movie.NEWRELEASE) {
             if (rental.getDaysRented() > 2) {
                 if (rental.getMovie().getPriceCode() == Movie.CHLDRNS) {
