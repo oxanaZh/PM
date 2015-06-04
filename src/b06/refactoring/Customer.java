@@ -5,6 +5,7 @@ import java.util.*;
 
 public class Customer {
 
+    private final AmountChecker amountChecker = new AmountChecker();
     private String name;
     private List<Rental> rentalList = new ArrayList<Rental>();
 
@@ -27,7 +28,7 @@ public class Customer {
 
         String result = "Rental record for " + getName() + "\n";
         for (Rental rental : rentalList) {
-            double amount = getAmount(rental, checkPriceCode(rental));
+            double amount = amountChecker.getAmount(rental, AmountChecker.checkPriceCode(rental));
 
             // add frequent renter points
             frequentRenterPoints++;
@@ -53,7 +54,7 @@ public class Customer {
 
         String result = "<h1>Rental record for <b>" + getName() + "</b></h1>\n";
         for (Rental rental : rentalList) {
-            double amount = getAmount(rental, checkPriceCode(rental));
+            double amount = amountChecker.getAmount(rental, AmountChecker.checkPriceCode(rental));
 
             // add frequent renter points
             frequentRenterPoints++;
@@ -72,38 +73,6 @@ public class Customer {
 
     }
 
-    private double checkPriceCode(Rental rental) {
-        double amount = 0;
-        switch (rental.getMovie().getPriceCode()) {
-            case Movie.REGULAR:
-                amount += 2;
-                break;
-            case Movie.NEWRELEASE:
-                amount += rental.getDaysRented() * 3;
-                break;
-            case Movie.CHLDRNS:
-                amount += 1.5;
-                break;
-            default:
-                amount = 0;
-        }
-        return amount;
-    }
-
-    private double getAmount(Rental rental, double amount) {
-        if (rental.getMovie().getPriceCode() != Movie.NEWRELEASE) {
-            if (rental.getDaysRented() > 2) {
-                if (rental.getMovie().getPriceCode() == Movie.CHLDRNS) {
-                    if (rental.getDaysRented() > 3)
-                        amount += (rental.getDaysRented() - 3) * 1.5;
-                } else {
-                    if (rental.getMovie().getPriceCode() == Movie.REGULAR)
-                        amount += (rental.getDaysRented() - 2) * 1.5;
-                }
-            }
-        }
-        return amount;
-    }
 }
 
 
