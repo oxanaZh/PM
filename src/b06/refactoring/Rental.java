@@ -1,12 +1,9 @@
 package b06.refactoring;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Rental {
 
-    public Movie movie;
-    public int daysRented;
+    private Movie movie;
+    private int daysRented;
 
     public Rental(Movie movie, int daysRented) {
         this.movie = movie;

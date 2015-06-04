@@ -6,8 +6,8 @@ public class Movie {
     public static final int REGULAR = 0;
     public static final int NEWRELEASE = 1;
 
-    public String title;
-    public int priceCode;
+    private String title;
+    private int priceCode;
 
     public Movie(String title, int priceCode) {
         this.title = title;
