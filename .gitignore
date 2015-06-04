@@ -1,16 +1,99 @@
 
-# Created by .ignore support plugin (hsz.mobi)
-### Java template
+# Compiled source #
+###################
+*.com
 *.class
+*.dll
+*.exe
+*.o
+*.so
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-gi
-# Package Files #
-*.war
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.dmg
+*.iso
+*.rar
+
+# Logs and databases #
+######################
+*.log
+*.sql
+
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Use wildcards as well
+*~
+*.swp
+
+# Can also ignore all directories and files in a directory.
+bin/**/*
+.metadata/
+
+
+# JAVA #
+######################
+*.class
 *.ear
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
 
+# Python/Jython #
+######################
+*.pyc
+*.class
+
+
+# LaTeX #
+######################
+*.acn
+*.acr
+*.alg
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.fdb_latexmk
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.ist
+*.lof
+*.log
+*.lot
+*.maf
+*.mtc
+*.mtc0
+*.nav
+*.nlo
+*.out
+*.pdfsync
+*.ps
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.xdy
+
+# IDE #
+######################
+.classpath
+.project
+
+
+/.eclipsefp/
+/.settings/
+/bin/
+
+    Status API Training Shop Blog About 
+
+    © 2015 GitHub, Inc. Terms Privacy Security Contact 
 
