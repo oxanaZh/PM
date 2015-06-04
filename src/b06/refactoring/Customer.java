@@ -108,7 +108,7 @@ public class Customer {
 
             totalAmount += amount;
         }
-        result += "<p>Amount owed is <b>" + String.valueOf(totalAmount) + "</b></p>\n";
+        result += "<p>Amount owned is <b>" + String.valueOf(totalAmount) + "</b></p>\n";
         result += "<p>You earned <b>" + String.valueOf(frequentRenterPoints) + " frequent renter points</b></p>";
         return result;
 
