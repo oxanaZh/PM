@@ -1,8 +1,22 @@
 package b06.refactoring;
 
-public class AmountChecker {
+/**
+ * Dokumentation der Utility-Klasse Amountchecker.
+ *
+ * Der Amountchecker berechnet den Wert der entliehenen Filme.
+ * @author Ruben Gees und Patrick Starzynski
+ */
+public final class AmountChecker {
+    private AmountChecker() {
 
-    public static double checkPriceCode(Rental rental) {
+    }
+
+    /**
+     * Liefert anhand des Preiscodes des Filmes den entsprechenden Wert zurück.
+     * @param rental was geliehen wurde.
+     * @return den Wert des entliehenen Filmes.
+     */
+    public static double checkPriceCode(final Rental rental) {
         double amount = 0;
         switch (rental.getMovie().getPriceCode()) {
             case Movie.REGULAR:
@@ -17,21 +31,25 @@ public class AmountChecker {
             default:
                 amount = 0;
         }
-        return getAmount(rental,amount);
+        return getAmount(rental, amount);
     }
 
-    private static double getAmount(Rental rental, double amount) {
+    private static double getAmount(final Rental rental, final double amount) {
+        double tempAmount = amount;
         if (rental.getMovie().getPriceCode() != Movie.NEWRELEASE) {
             if (rental.getDaysRented() > 2) {
                 if (rental.getMovie().getPriceCode() == Movie.CHLDRNS) {
-                    if (rental.getDaysRented() > 3)
-                        amount += (rental.getDaysRented() - 3) * 1.5;
+                    if (rental.getDaysRented() > 3) {
+                        tempAmount += (rental.getDaysRented() - 3) * 1.5;
+                    }
                 } else {
-                    if (rental.getMovie().getPriceCode() == Movie.REGULAR)
-                        amount += (rental.getDaysRented() - 2) * 1.5;
+                    if (rental.getMovie().getPriceCode() == Movie.REGULAR) {
+                        tempAmount += (rental.getDaysRented() - 2) * 1.5;
+                    }
                 }
             }
         }
-        return amount;
+        return tempAmount;
     }
+
 }

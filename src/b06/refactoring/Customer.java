@@ -1,26 +1,58 @@
 package b06.refactoring;
 
-import java.util.*;
 
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Dokumentation der Klasse Customer.
+ * <p>
+ * Die Klasse Customer repräsentiert den Kunden der Artikel ausleihen kann.
+ *
+ * @author Ruben Gees und Patrick Starzynski
+ */
 public class Customer {
 
     private String name;
-    private List<Rental> rentalList = new ArrayList<Rental>();
+    private List<Rental> rentalList = new ArrayList<>();
 
-
-    public Customer(String customerName) {
+    /**
+     * Der Konstruktor des Kunden.
+     *
+     * @param customerName der Name des Kunden
+     */
+    public Customer(final String customerName) {
         this.name = customerName;
     }
 
+    /**
+     * Getter für den Kundennamen.
+     *
+     * @return den Kundennamen.
+     */
     public String getName() {
         return name;
     }
 
-    public void addRental(Rental rental) {
+    /**
+     * Leiht etwas aus.
+     *
+     * @param rental ein Rentalobjekt welches geliehen werden soll.
+     * @see Rental
+     */
+    public void addRental(final Rental rental) {
         rentalList.add(rental);
     }
 
+    /**
+     * Generiert String zur Ausgabe.
+     * <p>
+     * Der String enthält den Kundennamen.
+     * Welche Artikel mit welchem Wert und dem komulierten Gesamtwert.
+     * Und die entsprechenden "RenterPoints".
+     *
+     * @return formatieren String mit den Informationen.
+     */
     public String generateStatement() {
         double totalAmount = 0;
         int frequentRenterPoints = 0;
@@ -28,25 +60,36 @@ public class Customer {
         String result = "Rental record for " + getName() + "\n";
         for (Rental rental : rentalList) {
             double amount = AmountChecker.checkPriceCode(rental);
-
-            // add frequent renter points
-            frequentRenterPoints++;
-            // add bonus for a two day new release rental
-            if (rental.getMovie().getPriceCode() == Movie.NEWRELEASE && rental.getDaysRented() > 1)
-                frequentRenterPoints++;
-
-            // show figures for this rental
-            result += "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(amount) + "\n";
-
+            frequentRenterPoints = getFrequentRenterPoints(frequentRenterPoints, rental);
+            result += "\t" + rental.getMovie().getTitle() + "\t" + amount + "\n";
             totalAmount += amount;
         }
 
-        result += "Amount owned is " + String.valueOf(totalAmount) + "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
+        result += "Amount owned is " + totalAmount + "\n";
+        result += "You earned " + frequentRenterPoints + " frequent renter points";
 
         return result;
     }
 
+    private int getFrequentRenterPoints(final int frequentRenterPoints, final Rental rental) {
+        int tempFrequentRenterPoints = frequentRenterPoints;
+        tempFrequentRenterPoints++;
+        // add bonus for a two day new release rental
+        if (rental.getMovie().getPriceCode() == Movie.NEWRELEASE && rental.getDaysRented() > 1) {
+            tempFrequentRenterPoints++;
+        }
+        return tempFrequentRenterPoints;
+    }
+
+    /**
+     * Generiert Ausgabe in HTML-Format.
+     * <p>
+     * Der String enthält den Kundennamen.
+     * Welche Artikel mit welchem Wert und dem komulierten Gesamtwert.
+     * Und die entsprechenden "RenterPoints".
+     *
+     * @return formatierten String mit HTML-Tags.
+     */
     public String generateHtmlStatement() {
         double totalAmount = 0;
         int frequentRenterPoints = 0;
@@ -54,20 +97,12 @@ public class Customer {
         String result = "<h1>Rental record for <b>" + getName() + "</b></h1>\n";
         for (Rental rental : rentalList) {
             double amount = AmountChecker.checkPriceCode(rental);
-
-            // add frequent renter points
-            frequentRenterPoints++;
-            // add bonus for a two day new release rental
-            if (rental.getMovie().getPriceCode() == Movie.NEWRELEASE && rental.getDaysRented() > 1)
-                frequentRenterPoints++;
-
-            // show figures for this rental
-            result += "<p>" + rental.getMovie().getTitle() + "\t" + String.valueOf(amount) + "</p>\n";
-
+            frequentRenterPoints = getFrequentRenterPoints(frequentRenterPoints, rental);
+            result += "<p>" + rental.getMovie().getTitle() + "\t" + amount + "</p>\n";
             totalAmount += amount;
         }
-        result += "<p>Amount owned is <b>" + String.valueOf(totalAmount) + "</b></p>\n";
-        result += "<p>You earned <b>" + String.valueOf(frequentRenterPoints) + " frequent renter points</b></p>";
+        result += "<p>Amount owned is <b>" + totalAmount + "</b></p>\n";
+        result += "<p>You earned <b>" + frequentRenterPoints + " frequent renter points</b></p>";
         return result;
 
     }
