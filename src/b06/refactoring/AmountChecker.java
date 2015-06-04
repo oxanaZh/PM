@@ -1,8 +1,6 @@
 package b06.refactoring;
 
 public class AmountChecker {
-    public AmountChecker() {
-    }
 
     public static double checkPriceCode(Rental rental) {
         double amount = 0;
