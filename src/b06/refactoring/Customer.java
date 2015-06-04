@@ -6,7 +6,7 @@ import java.util.*;
 public class Customer {
 
     private String name;
-    private List<Rental> allRentals = new ArrayList<Rental>();
+    private List<Rental> rentalList = new ArrayList<Rental>();
 
     public Customer(String name) {
         this.name = name;
@@ -17,7 +17,7 @@ public class Customer {
     }
 
     public void addRental(Rental rental) {
-        allRentals.add(rental);
+        rentalList.add(rental);
     }
 
     public String statement() {
@@ -25,7 +25,7 @@ public class Customer {
         int frequentRenterPoints = 0;
 
         String result = "Rental record for " + getName() + "\n";
-        for (Rental rental : allRentals) {
+        for (Rental rental : rentalList) {
             double amount = 0;
             switch (rental.getMovie().getPriceCode()) {
             case Movie.REGULAR:
@@ -72,7 +72,7 @@ public class Customer {
         int frequentRenterPoints = 0;
 
         String result = "<h1>Rental record for <b>" + getName() + "</b></h1>\n";
-        for (Rental rental : allRentals) {
+        for (Rental rental : rentalList) {
             double amount = 0;
             switch (rental.getMovie().getPriceCode()) {
             case Movie.REGULAR:
