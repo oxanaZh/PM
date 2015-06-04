@@ -35,16 +35,18 @@ public class CustomerTest {
     @Test
     public void testStatement() throws Exception {
         customer.addRental(new Rental(new Movie("testMovie",5),5));
-        assertTrue(customer.statement().contains("testMovie"));
-        assertFalse(customer.statement().contains("Harry Potter"));
+        String outputString ="Rental record for testCustomer\n"+"\ttestMovie\t0.0\n"+ "Amount owned is 0.0\n" + "You earned 1 frequent renter points";
+        assertEquals(outputString,customer.statement());
+        assertNotEquals(outputString,customer.htmlStatement());
     }
 
     @Test
     public void testHtmlStatement() throws Exception {
         customer.addRental(new Rental(new Movie("testMovie",5),5));
-        assertTrue(customer.htmlStatement().contains("<h1>Rental record for <b>testCustomer</b></h1>"));
-        assertTrue(customer.htmlStatement().contains("<p>testMovie\t0.0</p>"));
-        assertTrue(customer.htmlStatement().contains("<p>Amount owned is <b>0.0</b></p>"));
-        assertTrue(customer.htmlStatement().contains("<p>You earned <b>1 frequent renter points</b></p>"));
+        String outputString ="<h1>Rental record for <b>testCustomer</b></h1>\n"+"<p>testMovie\t0.0</p>\n"+ "<p>Amount owned is <b>0.0</b></p>\n" + "<p>You earned <b>1 frequent renter points</b></p>";
+        assertEquals(outputString, customer.htmlStatement());
+        assertNotEquals(outputString, customer.statement());
+
+
     }
 }
