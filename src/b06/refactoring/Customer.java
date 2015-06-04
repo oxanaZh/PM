@@ -37,18 +37,7 @@ public class Customer {
                     case Movie.CHLDRNS:
                         amount += 1.5;
                 }
-
-                if (rental.getMovie().getPriceCode() != Movie.NEWRELEASE) {
-                    if (rental.getDaysRented() > 2) {
-                        if (rental.getMovie().getPriceCode() == Movie.CHLDRNS){
-                            if( rental.getDaysRented() > 3 )
-                                amount+=(rental.getDaysRented()-3)*1.5;
-                        }else{
-                            if( rental.getMovie().getPriceCode() == Movie.REGULAR)
-                                amount+=(rental.getDaysRented()-2)*1.5;
-                        }
-                    }
-                }
+                amount = getAmount(rental, amount);
 
                 // add frequent renter points
                 frequentRenterPoints++;
@@ -85,17 +74,7 @@ public class Customer {
                 amount += 1.5;
             }
 
-            if (rental.getMovie().getPriceCode() != Movie.NEWRELEASE) {
-                if (rental.getDaysRented() > 2) {
-                    if (rental.getMovie().getPriceCode() == Movie.CHLDRNS){
-                        if( rental.getDaysRented() > 3 )
-                            amount+=(rental.getDaysRented()-3)*1.5;
-                    }else{
-                    if( rental.getMovie().getPriceCode() == Movie.REGULAR)
-                        amount+=(rental.getDaysRented()-2)*1.5;
-                    }
-                }
-            }
+            amount = getAmount(rental, amount);
 
             // add frequent renter points
             frequentRenterPoints++;
@@ -112,8 +91,21 @@ public class Customer {
         result += "<p>You earned <b>" + String.valueOf(frequentRenterPoints) + " frequent renter points</b></p>";
         return result;
 
+    }
 
-
+    private double getAmount(Rental rental, double amount) {
+        if (rental.getMovie().getPriceCode() != Movie.NEWRELEASE) {
+            if (rental.getDaysRented() > 2) {
+                if (rental.getMovie().getPriceCode() == Movie.CHLDRNS){
+                    if( rental.getDaysRented() > 3 )
+                        amount+=(rental.getDaysRented()-3)*1.5;
+                }else{
+                if( rental.getMovie().getPriceCode() == Movie.REGULAR)
+                    amount+=(rental.getDaysRented()-2)*1.5;
+                }
+            }
+        }
+        return amount;
     }
 }
 
