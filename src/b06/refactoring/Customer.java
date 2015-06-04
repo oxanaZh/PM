@@ -8,8 +8,9 @@ public class Customer {
     private String name;
     private List<Rental> rentalList = new ArrayList<Rental>();
 
-    public Customer(String name) {
-        this.name = name;
+
+    public Customer(String customerName) {
+        this.name = customerName;
     }
 
     public String getName() {
@@ -21,60 +22,38 @@ public class Customer {
     }
 
     public String generateStatement() {
-            double totalAmount = 0;
-            int frequentRenterPoints = 0;
+        double totalAmount = 0;
+        int frequentRenterPoints = 0;
 
-            String result = "Rental record for " + getName() + "\n";
-            for (Rental rental : rentalList) {
-                double amount = 0;
-                switch (rental.getMovie().getPriceCode()) {
-                    case Movie.REGULAR:
-                        amount += 2;
-                        break;
-                    case Movie.NEWRELEASE:
-                        amount += rental.getDaysRented() * 3;
-                        break;
-                    case Movie.CHLDRNS:
-                        amount += 1.5;
-                }
-                amount = getAmount(rental, amount);
+        String result = "Rental record for " + getName() + "\n";
+        for (Rental rental : rentalList) {
+            double amount = getAmount(rental, checkPriceCode(rental));
 
-                // add frequent renter points
+            // add frequent renter points
+            frequentRenterPoints++;
+            // add bonus for a two day new release rental
+            if (rental.getMovie().getPriceCode() == Movie.NEWRELEASE && rental.getDaysRented() > 1)
                 frequentRenterPoints++;
-                // add bonus for a two day new release rental
-                if (rental.getMovie().getPriceCode() == Movie.NEWRELEASE && rental.getDaysRented() > 1)
-                    frequentRenterPoints++;
 
-                // show figures for this rental
-                result += "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(amount) + "\n";
+            // show figures for this rental
+            result += "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(amount) + "\n";
 
-                totalAmount += amount;
-            }
+            totalAmount += amount;
+        }
 
         result += "Amount owned is " + String.valueOf(totalAmount) + "\n";
         result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
 
         return result;
     }
+
     public String generateHtmlStatement() {
         double totalAmount = 0;
         int frequentRenterPoints = 0;
 
         String result = "<h1>Rental record for <b>" + getName() + "</b></h1>\n";
         for (Rental rental : rentalList) {
-            double amount = 0;
-            switch (rental.getMovie().getPriceCode()) {
-            case Movie.REGULAR:
-                amount += 2;
-                break;
-            case Movie.NEWRELEASE:
-                amount += rental.getDaysRented() * 3;
-                break;
-            case Movie.CHLDRNS:
-                amount += 1.5;
-            }
-
-            amount = getAmount(rental, amount);
+            double amount = getAmount(rental, checkPriceCode(rental));
 
             // add frequent renter points
             frequentRenterPoints++;
@@ -93,15 +72,33 @@ public class Customer {
 
     }
 
+    private double checkPriceCode(Rental rental) {
+        double amount = 0;
+        switch (rental.getMovie().getPriceCode()) {
+            case Movie.REGULAR:
+                amount += 2;
+                break;
+            case Movie.NEWRELEASE:
+                amount += rental.getDaysRented() * 3;
+                break;
+            case Movie.CHLDRNS:
+                amount += 1.5;
+                break;
+            default:
+                amount = 0;
+        }
+        return amount;
+    }
+
     private double getAmount(Rental rental, double amount) {
         if (rental.getMovie().getPriceCode() != Movie.NEWRELEASE) {
             if (rental.getDaysRented() > 2) {
-                if (rental.getMovie().getPriceCode() == Movie.CHLDRNS){
-                    if( rental.getDaysRented() > 3 )
-                        amount+=(rental.getDaysRented()-3)*1.5;
-                }else{
-                if( rental.getMovie().getPriceCode() == Movie.REGULAR)
-                    amount+=(rental.getDaysRented()-2)*1.5;
+                if (rental.getMovie().getPriceCode() == Movie.CHLDRNS) {
+                    if (rental.getDaysRented() > 3)
+                        amount += (rental.getDaysRented() - 3) * 1.5;
+                } else {
+                    if (rental.getMovie().getPriceCode() == Movie.REGULAR)
+                        amount += (rental.getDaysRented() - 2) * 1.5;
                 }
             }
         }
