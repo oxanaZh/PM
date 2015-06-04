@@ -6,7 +6,7 @@ import java.util.*;
 public class Customer {
 
     private String name;
-    private List<Rental> rentals = new ArrayList<Rental>();
+    private List<Rental> allRentals = new ArrayList<Rental>();
 
     public Customer(String name) {
         this.name = name;
@@ -17,7 +17,7 @@ public class Customer {
     }
 
     public void addRental(Rental rental) {
-        rentals.add(rental);
+        allRentals.add(rental);
     }
 
     public String statement() {
@@ -25,26 +25,26 @@ public class Customer {
         int frequentRenterPoints = 0;
 
         String result = "Rental record for " + getName() + "\n";
-        for (Rental rental : rentals) {
+        for (Rental rental : allRentals) {
             double amount = 0;
             switch (rental.getMovie().getPriceCode()) {
-            case Movie.regular:
+            case Movie.REGULAR:
                 amount += 2;
                 break;
-            case Movie.new_rel:
+            case Movie.NEWRELEASE:
                 amount += rental.getDaysRented() * 3;
                 break;
-            case Movie.chldrns:
+            case Movie.CHLDRNS:
                 amount += 1.5;
         }
 
-        if (rental.getMovie().getPriceCode() != Movie.new_rel) {
+        if (rental.getMovie().getPriceCode() != Movie.NEWRELEASE) {
             if (rental.getDaysRented() > 2) {
-                if (rental.getMovie().getPriceCode() == Movie.chldrns){
+                if (rental.getMovie().getPriceCode() == Movie.CHLDRNS){
                     if( rental.getDaysRented() > 3 )
                         amount+=(rental.getDaysRented()-3)*1.5;
                 }else{
-                if( rental.getMovie().getPriceCode() == Movie.regular )
+                if( rental.getMovie().getPriceCode() == Movie.REGULAR)
                     amount+=(rental.getDaysRented()-2)*1.5;
                 }
             }
@@ -53,7 +53,7 @@ public class Customer {
             // add frequent renter points
             frequentRenterPoints++;
             // add bonus for a two day new release rental
-            if (rental.getMovie().getPriceCode() == Movie.new_rel && rental.getDaysRented() > 1)
+            if (rental.getMovie().getPriceCode() == Movie.NEWRELEASE && rental.getDaysRented() > 1)
                 frequentRenterPoints++;
 
             // show figures for this rental
@@ -72,26 +72,26 @@ public class Customer {
         int frequentRenterPoints = 0;
 
         String result = "<h1>Rental record for <b>" + getName() + "</b></h1>\n";
-        for (Rental rental : rentals) {
+        for (Rental rental : allRentals) {
             double amount = 0;
             switch (rental.getMovie().getPriceCode()) {
-            case Movie.regular:
+            case Movie.REGULAR:
                 amount += 2;
                 break;
-            case Movie.new_rel:
+            case Movie.NEWRELEASE:
                 amount += rental.getDaysRented() * 3;
                 break;
-            case Movie.chldrns:
+            case Movie.CHLDRNS:
                 amount += 1.5;
             }
 
-            if (rental.getMovie().getPriceCode() != Movie.new_rel) {
+            if (rental.getMovie().getPriceCode() != Movie.NEWRELEASE) {
                 if (rental.getDaysRented() > 2) {
-                    if (rental.getMovie().getPriceCode() == Movie.chldrns){
+                    if (rental.getMovie().getPriceCode() == Movie.CHLDRNS){
                         if( rental.getDaysRented() > 3 )
                             amount+=(rental.getDaysRented()-3)*1.5;
                     }else{
-                    if( rental.getMovie().getPriceCode() == Movie.regular )
+                    if( rental.getMovie().getPriceCode() == Movie.REGULAR)
                         amount+=(rental.getDaysRented()-2)*1.5;
                     }
                 }
@@ -100,7 +100,7 @@ public class Customer {
             // add frequent renter points
             frequentRenterPoints++;
             // add bonus for a two day new release rental
-            if (rental.getMovie().getPriceCode() == Movie.new_rel && rental.getDaysRented() > 1)
+            if (rental.getMovie().getPriceCode() == Movie.NEWRELEASE && rental.getDaysRented() > 1)
                 frequentRenterPoints++;
 
             // show figures for this rental
