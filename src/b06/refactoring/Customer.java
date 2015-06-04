@@ -5,7 +5,6 @@ import java.util.*;
 
 public class Customer {
 
-    private final AmountChecker amountChecker = new AmountChecker();
     private String name;
     private List<Rental> rentalList = new ArrayList<Rental>();
 
