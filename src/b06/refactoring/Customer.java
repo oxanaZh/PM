@@ -20,7 +20,7 @@ public class Customer {
         rentals.add(rental);
     }
 
-    public String statement() {
+    public String generateStatement() {
         double totalAmount = 0;
         int frequentRenterPoints = 0;
 
@@ -62,12 +62,12 @@ public class Customer {
             totalAmount += amount;
         }
 
-        result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
+        result += "Amount owned is " + String.valueOf(totalAmount) + "\n";
         result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
 
         return result;
     }
-    public String htmlStatement() {
+    public String generateHtmlStatement() {
         double totalAmount = 0;
         int frequentRenterPoints = 0;
 
@@ -108,7 +108,7 @@ public class Customer {
 
             totalAmount += amount;
         }
-        result += "<p>Amount owed is <b>" + String.valueOf(totalAmount) + "</b></p>\n";
+        result += "<p>Amount owned is <b>" + String.valueOf(totalAmount) + "</b></p>\n";
         result += "<p>You earned <b>" + String.valueOf(frequentRenterPoints) + " frequent renter points</b></p>";
         return result;
 
