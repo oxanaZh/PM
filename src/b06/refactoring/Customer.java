@@ -55,29 +55,32 @@ public class Customer {
      */
     public String generateStatement() {
         double totalAmount = 0;
-        int frequentRenterPoints = 0;
+        int freqRentPoints = 0;
 
         String result = "Rental record for " + getName() + "\n";
         for (Rental rental : rentalList) {
 
             double amount = AmountChecker.checkPriceCode(rental);
-            frequentRenterPoints = getFrequentRenterPoints(frequentRenterPoints, rental);
-            result += "\t" + rental.getMovie().getTitle() + "\t" + amount + "\n";
+            freqRentPoints = getFreqRentPoints(freqRentPoints, rental);
+            result += "\t" + rental.getMovie().getTitle()
+                    + "\t" + amount + "\n";
             totalAmount += amount;
         }
 
         result += "Amount owned is " + totalAmount + "\n";
-        result += "You earned " + frequentRenterPoints
+        result += "You earned " + freqRentPoints
                 + " frequent renter points";
 
         return result;
     }
 
-    private int getFrequentRenterPoints(final int frequentRenterPoints, final Rental rental) {
-        int tempFrequentRenterPoints = frequentRenterPoints;
+    private int getFreqRentPoints(final int freqRentPoints,
+                                  final Rental rental) {
+        int tempFrequentRenterPoints = freqRentPoints;
         tempFrequentRenterPoints++;
         // add bonus for a two day new release rental
-        if (rental.getMovie().getPriceCode() == Movie.NEWRELEASE && rental.getDaysRented() > 1) {
+        if (rental.getMovie().getPriceCode() == Movie.NEWRELEASE
+                && rental.getDaysRented() > 1) {
             tempFrequentRenterPoints++;
         }
         return tempFrequentRenterPoints;
@@ -94,17 +97,19 @@ public class Customer {
      */
     public String generateHtmlStatement() {
         double totalAmount = 0;
-        int frequentRenterPoints = 0;
+        int freqRentPoints = 0;
 
         String result = "<h1>Rental record for <b>" + getName() + "</b></h1>\n";
         for (Rental rental : rentalList) {
             double amount = AmountChecker.checkPriceCode(rental);
-            frequentRenterPoints = getFrequentRenterPoints(frequentRenterPoints, rental);
-            result += "<p>" + rental.getMovie().getTitle() + "\t" + amount + "</p>\n";
+            freqRentPoints = getFreqRentPoints(freqRentPoints, rental);
+            result += "<p>" + rental.getMovie().getTitle()
+                    + "\t" + amount + "</p>\n";
             totalAmount += amount;
         }
         result += "<p>Amount owned is <b>" + totalAmount + "</b></p>\n";
-        result += "<p>You earned <b>" + frequentRenterPoints + " frequent renter points</b></p>";
+        result += "<p>You earned <b>" + freqRentPoints
+                + " frequent renter points</b></p>";
         return result;
 
     }
