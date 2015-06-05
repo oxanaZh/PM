@@ -7,6 +7,11 @@ package b06.refactoring;
  * @author Ruben Gees und Patrick Starzynski
  */
 public final class AmountChecker {
+
+    private static final int THREE = 3;
+    private static final int TWO = 3;
+    private static final double ONE_POINT_FIVE = 1.5;
+
     private AmountChecker() {
 
     }
@@ -20,13 +25,13 @@ public final class AmountChecker {
         double amount = 0;
         switch (rental.getMovie().getPriceCode()) {
             case Movie.REGULAR:
-                amount += 2;
+                amount += TWO;
                 break;
             case Movie.NEWRELEASE:
-                amount += rental.getDaysRented() * 3;
+                amount += rental.getDaysRented() * THREE;
                 break;
             case Movie.CHLDRNS:
-                amount += 1.5;
+                amount += ONE_POINT_FIVE;
                 break;
             default:
                 amount = 0;
@@ -39,12 +44,12 @@ public final class AmountChecker {
         if (rental.getMovie().getPriceCode() != Movie.NEWRELEASE) {
             if (rental.getDaysRented() > 2) {
                 if (rental.getMovie().getPriceCode() == Movie.CHLDRNS) {
-                    if (rental.getDaysRented() > 3) {
-                        tempAmount += (rental.getDaysRented() - 3) * 1.5;
+                    if (rental.getDaysRented() > THREE) {
+                        tempAmount += (rental.getDaysRented() - THREE) * ONE_POINT_FIVE;
                     }
                 } else {
                     if (rental.getMovie().getPriceCode() == Movie.REGULAR) {
-                        tempAmount += (rental.getDaysRented() - 2) * 1.5;
+                        tempAmount += (rental.getDaysRented() - TWO) * ONE_POINT_FIVE;
                     }
                 }
             }

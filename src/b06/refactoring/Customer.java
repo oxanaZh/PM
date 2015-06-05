@@ -59,6 +59,7 @@ public class Customer {
 
         String result = "Rental record for " + getName() + "\n";
         for (Rental rental : rentalList) {
+
             double amount = AmountChecker.checkPriceCode(rental);
             frequentRenterPoints = getFrequentRenterPoints(frequentRenterPoints, rental);
             result += "\t" + rental.getMovie().getTitle() + "\t" + amount + "\n";
@@ -66,7 +67,8 @@ public class Customer {
         }
 
         result += "Amount owned is " + totalAmount + "\n";
-        result += "You earned " + frequentRenterPoints + " frequent renter points";
+        result += "You earned " + frequentRenterPoints
+                + " frequent renter points";
 
         return result;
     }

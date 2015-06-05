@@ -27,7 +27,8 @@ public class Movie {
     /**
      * Konstruktor der Klasse Movie
      *
-     * Im Konstruktor wird der Filmtitel und der Preisschlüssel des Filmes definiert.
+     * Im Konstruktor wird der Filmtitel und der
+     * Preisschlüssel definiert.
      * @param movieTitle Name des Filmes.
      * @param defaultPriceCode Preisschlüssel des Filmes.
      */
