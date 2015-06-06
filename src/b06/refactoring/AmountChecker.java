@@ -9,7 +9,7 @@ package b06.refactoring;
 public final class AmountChecker {
 
     private static final int THREE = 3;
-    private static final int TWO = 3;
+    private static final int TWO = 2;
     private static final double ONE_POINT_FIVE = 1.5;
 
     private AmountChecker() {
