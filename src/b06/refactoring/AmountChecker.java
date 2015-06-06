@@ -41,18 +41,31 @@ public final class AmountChecker {
 
     private static double getAmount(final Rental rental, final double amount) {
         double tempAmount = amount;
-        if (rental.getMovie().getPriceCode() != Movie.NEWRELEASE) {
-            if (rental.getDaysRented() > 2) {
-                if (rental.getMovie().getPriceCode() == Movie.CHLDRNS) {
-                    if (rental.getDaysRented() > THREE) {
-                        tempAmount += (rental.getDaysRented() - THREE) * ONE_POINT_FIVE;
-                    }
-                } else {
-                    if (rental.getMovie().getPriceCode() == Movie.REGULAR) {
-                        tempAmount += (rental.getDaysRented() - TWO) * ONE_POINT_FIVE;
-                    }
-                }
-            }
+        if (rental.getMovie().getPriceCode()
+                != Movie.NEWRELEASE
+                && rental.getDaysRented() > TWO) {
+            return getAmountChldrns(rental, amount);
+        }
+        return tempAmount;
+
+    }
+    private static double getAmountChldrns(final Rental rental,
+                                           final double amount) {
+        double tempAmount = amount;
+        if (rental.getMovie().getPriceCode() == Movie.CHLDRNS
+                && rental.getDaysRented() > THREE) {
+            tempAmount += (rental.getDaysRented() - THREE) * ONE_POINT_FIVE;
+            return tempAmount;
+        }
+        return getAmountRegular(rental, amount);
+    }
+
+    private static double getAmountRegular(final Rental rental,
+                                           final double amount) {
+        double tempAmount = amount;
+        if (rental.getMovie().getPriceCode() == Movie.REGULAR) {
+            tempAmount += (rental.getDaysRented() - TWO) * ONE_POINT_FIVE;
+            return tempAmount;
         }
         return tempAmount;
     }
