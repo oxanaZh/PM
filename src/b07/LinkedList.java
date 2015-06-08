@@ -45,7 +45,9 @@ public class LinkedList {
      *             if the index is out of range (index < 0 || index > size())
      */
     public void add(int index, T toAdd) {
+
         // fill me :)
+
     }
 
     /**
@@ -116,6 +118,8 @@ public class LinkedList {
      * @return the element at the specified position in this list.
      * @throws IndexOutOfBoundsException
      *             if the index is out of range (index < 0 || index >= size())
+     * @throws NoSuchElementException
+     *             if list is empty
      */
     public T get(int index) {
 
@@ -293,8 +297,8 @@ public class LinkedList {
 
     /**
      * Sorts this list according to the order induced by the specified
-     * {@link Comparator}. The comparator needs to be parametrized with
-     * the (generic) type of the data stored in the nodes.
+     * {@link Comparator}. The comparator needs to be parametrized with the
+     * (generic) type of the data stored in the nodes.
      *
      * Vorgabe
      *
