@@ -293,7 +293,8 @@ public class LinkedList {
 
     /**
      * Sorts this list according to the order induced by the specified
-     * {@link Comparator}.
+     * {@link Comparator}. The comparator needs to be parametrized with
+     * the (generic) type of the data stored in the nodes.
      *
      * Vorgabe
      *
