@@ -87,8 +87,9 @@ bin/**/*
 ######################
 .classpath
 .project
+.iml
 
-
+/dist/
 /.eclipsefp/
 /.settings/
 /bin/
