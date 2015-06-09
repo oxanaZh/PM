@@ -16,12 +16,13 @@ package b07;
  * wird.
  * 
  * Vorgabe:
+ * 
  * @author Anton Oster
  * @author Ronald Lepp
  * @author Matthias Guzy
  * @author Steven Yeates
  * 
- * Vorgabe bearbeitet:
+ *         Vorgabe bearbeitet:
  * @author Oxana Zhurakovskaya
  * 
  * @param <E>
@@ -80,7 +81,7 @@ public class Node<E extends Comparable<E>> implements Comparable<Node<E>> {
     * Vegleich zwischen Knoten führt auf den Vergleich der Nutzdaten zurück
     * 
     * @return ergebniss des Vergleichs von zwei Nutzdaten
-    * @see int java.lang.Comparable.compareTo(T o)
+    * @see {@link java.lang.Comparable}
     */
    @Override
    public int compareTo(Node<E> n) {
@@ -91,17 +92,39 @@ public class Node<E extends Comparable<E>> implements Comparable<Node<E>> {
    public String toString() {
       return "Node [daten=" + daten + ", next=" + next + "]";
    }
-   
+
+   /**
+    * vergleicht zwei Nodes.
+    * 
+    * zwei Nodes gelten als gleich, wenn deren Nutzdaten gleich sind die
+    * referenz zu nächten Node wird nicht berücksichtigt
+    * 
+    * @return true wenn der Node identisch mit dem in Argument difenierten Node,
+    *         oder wenn die Nutzdaten gleich sind, sonst false
+    */
    @Override
    public boolean equals(Object obj) {
-     if (obj == this) {
+      if (obj == this) {
          return true;
-     }
-     if (obj == null || obj.getClass() != this.getClass()) {
+      }
+      if (obj == null || obj.getClass() != this.getClass()) {
          return false;
-     }
+      }
+      Node<E> n;
+      try {
+         n = (Node<E>) obj;
+      } catch (ClassCastException e) {
+         return false;
+      }
 
-     Node<E> n = (Node<E>) obj;
-     return (this.getDaten()== n.getDaten() );
- }
+      return (this.getDaten() == n.getDaten());
+   }
+   
+   @Override
+   public int hashCode(){
+      //TODO
+      return 0;
+      
+   }
+
 }
