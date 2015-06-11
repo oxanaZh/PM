@@ -90,7 +90,7 @@ public class Node<E extends Comparable<E>> implements Comparable<Node<E>> {
 
    @Override
    public String toString() {
-      return "Node [content=" + content + ", next=" + next + "]";
+      return "Node [content = " + content + "]";
    }
 
 
