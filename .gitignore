@@ -90,6 +90,7 @@ bin/**/*
 .project
 .idea/
 
+/lib/tests.jar
 /dist/
 /.eclipsefp/
 /.settings/
