@@ -30,11 +30,11 @@ package b07;
  */
 public class Node<E extends Comparable<E>> implements Comparable<Node<E>> {
 
-   private E daten;
+   private E content;
    private Node<E> next;
 
    public Node(E data) {
-      this.setDaten(data);
+      this.setContent(data);
       this.next = null;
    }
 
@@ -43,18 +43,18 @@ public class Node<E extends Comparable<E>> implements Comparable<Node<E>> {
     * 
     * @return Nutzdaten
     */
-   public E getDaten() {
-      return this.daten;
+   public E getContent() {
+      return this.content;
    }
 
    /**
     * setzt als Argument vorgegebenen Nutzdaten.
-    * 
-    * @param daten
+    *
+    * @param content
     *           - Nutzdaten
     */
-   public void setDaten(E daten) {
-      this.daten = daten;
+   public void setContent(E content) {
+      this.content = content;
    }
 
    /**
@@ -85,46 +85,31 @@ public class Node<E extends Comparable<E>> implements Comparable<Node<E>> {
     */
    @Override
    public int compareTo(Node<E> n) {
-      return this.getDaten().compareTo(n.getDaten());
+      return this.getContent().compareTo(n.getContent());
    }
 
    @Override
    public String toString() {
-      return "Node [daten=" + daten + ", next=" + next + "]";
+      return "Node [content=" + content + ", next=" + next + "]";
    }
 
-   /**
-    * vergleicht zwei Nodes.
-    * 
-    * zwei Nodes gelten als gleich, wenn deren Nutzdaten gleich sind die
-    * referenz zu nächten Node wird nicht berücksichtigt
-    * 
-    * @return true wenn der Node identisch mit dem in Argument difenierten Node,
-    *         oder wenn die Nutzdaten gleich sind, sonst false
-    */
+
    @Override
-   public boolean equals(Object obj) {
-      if (obj == this) {
-         return true;
-      }
-      if (obj == null || obj.getClass() != this.getClass()) {
-         return false;
-      }
-      Node<E> n;
-      try {
-         n = (Node<E>) obj;
-      } catch (ClassCastException e) {
-         return false;
-      }
+   public boolean equals(Object o) {
+      if (this == o) return true;
+      if (!(o instanceof Node)) return false;
 
-      return (this.getDaten() == n.getDaten());
+      Node<?> node = (Node<?>) o;
+
+      if (content != null ? !content.equals(node.content) : node.content != null) return false;
+      return !(next != null ? !next.equals(node.next) : node.next != null);
+
    }
-   
+
    @Override
-   public int hashCode(){
-      //TODO
-      return 0;
-      
-   }
+   public int hashCode() {
+      int result = content != null ? content.hashCode() : 0;
 
+      return result;
+   }
 }
