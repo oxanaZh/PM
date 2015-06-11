@@ -85,9 +85,10 @@ bin/**/*
 
 # IDE #
 ######################
+*.iml
 .classpath
 .project
-.iml
+.idea/
 
 /dist/
 /.eclipsefp/
