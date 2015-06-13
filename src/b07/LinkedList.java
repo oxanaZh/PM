@@ -1,8 +1,24 @@
-package b07;
+package src.b07;
+
 
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.hssf.util.HSSFColor;
 
 /**
  * Klasse für eine einfach verkettete Liste (vgl. LV "ADS").
@@ -469,7 +485,86 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<T> {
 
                 return current.getContent();
             }
+
+            @Override
+            public void remove() {
+               // TODO Auto-generated method stub
+               
+            }
         };
+    }
+    
+    public boolean saveExcel(){
+       String fs = File.separator;
+       String excelFileName = "LinkedListExcel.xls";
+       String sheetName = "LinkedList";
+       
+       HSSFWorkbook wb = new HSSFWorkbook();
+       HSSFSheet sheet = wb.createSheet(sheetName) ;
+
+       CellStyle headerStyle = wb.createCellStyle();
+       headerStyle.setFillBackgroundColor(IndexedColors.YELLOW.getIndex());
+       Font headerFont = wb.createFont();
+       headerFont.setBold(true);
+       headerStyle.setFont(headerFont);
+       headerStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+       
+       HSSFRow headerRow = sheet.createRow(0);
+       headerRow.setRowStyle(headerStyle);
+       
+       HSSFCell indexHeader = headerRow.createCell(0);
+       indexHeader.setCellValue("Index");
+       
+       HSSFCell contentHeader = headerRow.createCell(1);
+       contentHeader.setCellValue("Content");
+       
+       CellStyle cellStyle1 = wb.createCellStyle();
+       cellStyle1.setFillBackgroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+       CellStyle cellStyle2 = wb.createCellStyle();
+       cellStyle2.setFillBackgroundColor(IndexedColors.AUTOMATIC.getIndex());
+       
+       
+       Iterator<T> iter = this.iterator();
+       for(int r = 0; iter.hasNext(); r++) {
+          HSSFRow row = sheet.createRow(r+1);
+          row.createCell(0).setCellValue(r);
+          row.createCell(1).setCellValue(iter.next().toString());
+          if(r%2==0){
+             row.setRowStyle(cellStyle1);
+          } else {
+             row.setRowStyle(cellStyle2);
+          }
+       }
+       
+       FileOutputStream fileOut = null;
+       try{
+          fileOut = new FileOutputStream(excelFileName);
+          wb.write(fileOut);
+          return true;
+       }
+       catch(FileNotFoundException fnfEx) {
+          return false;
+       // TODO: handle exception
+       }
+       catch (SecurityException  securEx) {
+          return false;
+         // TODO: handle exception
+      }
+       catch (IOException ioEx) {
+          return false;
+       // TODO: handle exception
+       }
+       finally{
+          try{
+             fileOut.close();
+          }
+          catch(IOException ioEx){
+          // TODO: handle exception
+          }
+          catch(NullPointerException npEx){
+          // TODO: handle exception
+          }
+       }
     }
 
 }

@@ -1,4 +1,4 @@
-package b07;
+package src.b07;
 
 /**
  * Hilfsklasse für {@link b07.LinkedList} zur Repräsentation eines
@@ -90,7 +90,7 @@ public class Node<E extends Comparable<E>> implements Comparable<Node<E>> {
 
    @Override
    public String toString() {
-      return "Node [content = " + content + "]";
+      return this.getContent().toString();
    }
 
 
