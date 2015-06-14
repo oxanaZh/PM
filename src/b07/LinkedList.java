@@ -1,7 +1,9 @@
 package src.b07;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -10,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -18,7 +21,6 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.hssf.util.HSSFColor;
 
 /**
  * Klasse für eine einfach verkettete Liste (vgl. LV "ADS").
@@ -497,74 +499,94 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<T> {
     public boolean saveExcel(){
        String fs = File.separator;
        String excelFileName = "LinkedListExcel.xls";
-       String sheetName = "LinkedList";
+       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
+       Date date = new Date();
+       String sheetName = dateFormat.format(date);
        
-       HSSFWorkbook wb = new HSSFWorkbook();
+       File file = new File(excelFileName);
+       HSSFWorkbook wb = null;
+       try{
+          InputStream input = new FileInputStream(file);
+          try {
+            wb = new HSSFWorkbook(input);
+         } catch (IOException e) {
+            wb = new HSSFWorkbook();
+         }
+       }
+       catch(FileNotFoundException fnfEx){
+          wb = new HSSFWorkbook();
+       }
+       catch(SecurityException  securEx){
+          wb = new HSSFWorkbook();
+       }
        HSSFSheet sheet = wb.createSheet(sheetName) ;
 
        CellStyle headerStyle = wb.createCellStyle();
-       headerStyle.setFillBackgroundColor(IndexedColors.YELLOW.getIndex());
        Font headerFont = wb.createFont();
        headerFont.setBold(true);
        headerStyle.setFont(headerFont);
        headerStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+       headerStyle.setFillForegroundColor(IndexedColors.YELLOW.getIndex());
        
        HSSFRow headerRow = sheet.createRow(0);
+       //die zeile funktioniert nich wie gewollt setRowStyle überschreibt nicht CellStyle
        headerRow.setRowStyle(headerStyle);
        
        HSSFCell indexHeader = headerRow.createCell(0);
        indexHeader.setCellValue("Index");
+       indexHeader.setCellStyle(headerStyle);
        
        HSSFCell contentHeader = headerRow.createCell(1);
        contentHeader.setCellValue("Content");
+       contentHeader.setCellStyle(headerStyle);
        
        CellStyle cellStyle1 = wb.createCellStyle();
-       cellStyle1.setFillBackgroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
-       CellStyle cellStyle2 = wb.createCellStyle();
-       cellStyle2.setFillBackgroundColor(IndexedColors.AUTOMATIC.getIndex());
+       cellStyle1.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+       cellStyle1.setFillPattern(CellStyle.SOLID_FOREGROUND);
        
        
        Iterator<T> iter = this.iterator();
        for(int r = 0; iter.hasNext(); r++) {
           HSSFRow row = sheet.createRow(r+1);
-          row.createCell(0).setCellValue(r);
-          row.createCell(1).setCellValue(iter.next().toString());
+          HSSFCell index = row.createCell(0);
+          index.setCellValue(r);
+          HSSFCell cont = row.createCell(1);
+          cont.setCellValue(iter.next().toString());
           if(r%2==0){
-             row.setRowStyle(cellStyle1);
-          } else {
-             row.setRowStyle(cellStyle2);
+             //row.setRowStyle(cellStyle1);
+             index.setCellStyle(cellStyle1);
+             cont.setCellStyle(cellStyle1);
           }
+          
        }
-       
+       boolean done = false;
        FileOutputStream fileOut = null;
        try{
           fileOut = new FileOutputStream(excelFileName);
           wb.write(fileOut);
-          return true;
+          done = true;
        }
        catch(FileNotFoundException fnfEx) {
-          return false;
        // TODO: handle exception
        }
        catch (SecurityException  securEx) {
-          return false;
-         // TODO: handle exception
+       // TODO: handle exception
       }
        catch (IOException ioEx) {
-          return false;
        // TODO: handle exception
        }
        finally{
           try{
-             fileOut.close();
+             if(null!=fileOut){
+                wb.close();
+                fileOut.close();
+             }
           }
           catch(IOException ioEx){
           // TODO: handle exception
           }
-          catch(NullPointerException npEx){
-          // TODO: handle exception
-          }
        }
+       return done;
     }
-
+    
 }

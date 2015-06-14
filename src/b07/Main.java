@@ -10,6 +10,7 @@ public class Main {
       list.add("second");
       list.add("third");
       list.add("any string");
+      list.add("something");
 
       Iterator iter = list.iterator();
       while(iter.hasNext()){
