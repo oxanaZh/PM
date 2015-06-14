@@ -12,7 +12,7 @@ public class Main {
       list.add("any string");
       list.add("something");
 
-      Iterator iter = list.iterator();
+      Iterator<String> iter = list.iterator();
       while(iter.hasNext()){
          System.out.println(iter.next().toString());
       }
@@ -22,6 +22,15 @@ public class Main {
       else{
          System.out.println("speichern fehlgeschlgen.");
       }
+      
+      LinkedList<String> list2= list.readExcel("LinkedListExcel.xls", "2015-06-14 08.37.46");
+      if(null!=list2){
+         Iterator<String> iter2 = list2.iterator();
+         while(iter2.hasNext()){
+            System.out.println(iter2.next().toString());
+         }
+      }
+      list2.saveExcel();
       
    }
 

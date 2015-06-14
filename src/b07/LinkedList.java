@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Random;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,6 +22,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
 
 /**
  * Klasse für eine einfach verkettete Liste (vgl. LV "ADS").
@@ -497,7 +499,7 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<T> {
     }
     
     public boolean saveExcel(){
-       String fs = File.separator;
+       
        String excelFileName = "LinkedListExcel.xls";
        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
        Date date = new Date();
@@ -519,7 +521,14 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<T> {
        catch(SecurityException  securEx){
           wb = new HSSFWorkbook();
        }
-       HSSFSheet sheet = wb.createSheet(sheetName) ;
+       HSSFSheet sheet;
+       try{
+           sheet = wb.createSheet(sheetName) ;
+       }
+       catch(IllegalArgumentException iaEx){
+          Random rand = new Random();
+          sheet = wb.createSheet(sheetName+"."+rand.nextInt());
+       }
 
        CellStyle headerStyle = wb.createCellStyle();
        Font headerFont = wb.createFont();
@@ -544,7 +553,6 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<T> {
        cellStyle1.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
        cellStyle1.setFillPattern(CellStyle.SOLID_FOREGROUND);
        
-       
        Iterator<T> iter = this.iterator();
        for(int r = 0; iter.hasNext(); r++) {
           HSSFRow row = sheet.createRow(r+1);
@@ -557,7 +565,6 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<T> {
              index.setCellStyle(cellStyle1);
              cont.setCellStyle(cellStyle1);
           }
-          
        }
        boolean done = false;
        FileOutputStream fileOut = null;
@@ -589,4 +596,49 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<T> {
        return done;
     }
     
+    public LinkedList<String> readExcel(String fileName, String sheetName){
+       LinkedList<String> list = new  LinkedList<String>();
+       String excelFileName = fileName;
+       File file = new File(excelFileName);
+       HSSFWorkbook wb = null;
+       InputStream input = null;
+       try{
+          input = new FileInputStream(file);
+          try {
+             wb = new HSSFWorkbook(input);
+             HSSFSheet sheet = wb.getSheet(sheetName);
+             if(null!=sheet){
+                Iterator<Row> rows = sheet.rowIterator();
+                while (rows.hasNext()){
+                   String s = rows.next().getCell(1).getStringCellValue();
+                   list.add(s);
+                }
+             }
+            return list; 
+             
+         } catch (IOException e) {
+            // TODO: handle exception
+         }
+       }
+       catch(FileNotFoundException fnfEx){
+          // TODO: handle exception
+       }
+       catch(SecurityException  securEx){
+          // TODO: handle exception
+       }
+       finally{
+          try{
+             if(null!=input){
+                input.close();
+             }
+             if(null!=wb){
+               wb.close(); 
+             }
+          }
+          catch(IOException e){
+          // TODO: handle exception
+          }
+       }
+       return null;
+    }
 }
