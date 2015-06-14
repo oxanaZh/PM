@@ -497,10 +497,14 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<T> {
             }
         };
     }
-    
-    public boolean saveExcel(){
+    /** 
+     * saves actual List into Excel-file.
+     * @param filename 
+     * @return true if new excel-file was saved, else false
+     */
+    public boolean saveExcel(String filename){
        
-       String excelFileName = "LinkedListExcel.xls";
+       String excelFileName = filename;
        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
        Date date = new Date();
        String sheetName = dateFormat.format(date);
@@ -510,8 +514,10 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<T> {
        try{
           InputStream input = new FileInputStream(file);
           try {
+             //if file exists, load thisfile into Workbook
             wb = new HSSFWorkbook(input);
          } catch (IOException e) {
+            // else create new empty Workbook
             wb = new HSSFWorkbook();
          }
        }
@@ -566,7 +572,7 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<T> {
              cont.setCellStyle(cellStyle1);
           }
        }
-       boolean done = false;
+       boolean done = false; //successful saved?
        FileOutputStream fileOut = null;
        try{
           fileOut = new FileOutputStream(excelFileName);
@@ -595,7 +601,12 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<T> {
        }
        return done;
     }
-    
+    /**
+     * 
+     * @param fileName
+     * @param sheetName
+     * @return
+     */
     public LinkedList<String> readExcel(String fileName, String sheetName){
        LinkedList<String> list = new  LinkedList<String>();
        String excelFileName = fileName;
@@ -610,7 +621,11 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<T> {
              if(null!=sheet){
                 Iterator<Row> rows = sheet.rowIterator();
                 while (rows.hasNext()){
-                   String s = rows.next().getCell(1).getStringCellValue();
+                   Row row = rows.next();
+                   if(row.getRowNum()==0){
+                      continue;
+                   }
+                   String s = row.getCell(1).getStringCellValue();
                    list.add(s);
                 }
              }

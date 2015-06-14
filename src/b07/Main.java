@@ -16,21 +16,21 @@ public class Main {
       while(iter.hasNext()){
          System.out.println(iter.next().toString());
       }
-      if(list.saveExcel()){
+      if(list.saveExcel("LinkedListExcel.xls")){
          System.out.println("gespeichert");
       }
       else{
          System.out.println("speichern fehlgeschlgen.");
       }
       
-      LinkedList<String> list2= list.readExcel("LinkedListExcel.xls", "2015-06-14 08.37.46");
+      LinkedList<String> list2= list.readExcel("LinkedListExcel.xls", "2015-06-14 09.01.28");
       if(null!=list2){
          Iterator<String> iter2 = list2.iterator();
          while(iter2.hasNext()){
             System.out.println(iter2.next().toString());
          }
       }
-      list2.saveExcel();
+      list2.saveExcel("LinkedListExcel2.xls");
       
    }
 
